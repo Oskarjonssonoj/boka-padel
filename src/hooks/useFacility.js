@@ -6,9 +6,11 @@ const useFacility = (facilityId) => {
 
 	// States
 	const [facility, setFacility] = useState();
+	const [loading, setLoading] = useState(true)
 
 	// Effects
 	useEffect(() => {
+		setLoading(true)
 
 		const unmount = db.collection('facilities').doc(facilityId).onSnapshot(doc => {
 			setFacility({
@@ -17,12 +19,13 @@ const useFacility = (facilityId) => {
 			})
 		})
 
+		setLoading(false)
 		return unmount
 
 	}, [facilityId])
 
 
-	return { facility };
+	return { facility, loading };
 }
 
 export default useFacility;

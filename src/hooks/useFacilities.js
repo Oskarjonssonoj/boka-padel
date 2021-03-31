@@ -5,10 +5,12 @@ const useFacilities = () => {
 
 	// States
 	const [facilities, setFacilities] = useState([])
+	const [loading, setLoading] = useState(true)
 
 	// Effects
 	useEffect(() => {
 		const unmount = db.collection('facilities').onSnapshot(snapshot => {
+				setLoading(true)
 				const renderSnapFacilities = []
 
 				snapshot.forEach(doc => {
@@ -19,12 +21,13 @@ const useFacilities = () => {
 				})
 
 			setFacilities(renderSnapFacilities)
+			setLoading(false)
 		})
 
 		return unmount
 	}, [])
 
-	return { facilities }
+	return { facilities, loading }
 }
 
 export default useFacilities

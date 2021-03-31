@@ -8,7 +8,8 @@ const GoogleMaps = ({name}) => {
             name && name === "PDL Center" ?
             <div className="mapouter">
                 <div className="gmap_canvas">
-                    <iframe 
+                    <iframe
+                        title="PDL" 
                         className="gmap_iframe" width="100%" 
                         frameborder="0" 
                         scrolling="no" 
@@ -23,6 +24,7 @@ const GoogleMaps = ({name}) => {
             <div className="mapouter">
                 <div className="gmap_canvas">
                     <iframe 
+                        title="Padel Crew" 
                         className="gmap_iframe" width="100%" 
                         frameborder="0" 
                         scrolling="no" 
@@ -37,6 +39,7 @@ const GoogleMaps = ({name}) => {
             <div className="mapouter">
                 <div className="gmap_canvas">
                     <iframe 
+                        title="MPC" 
                         className="gmap_iframe" width="100%" 
                         frameborder="0" 
                         scrolling="no" 

@@ -20,6 +20,7 @@
     "react-gravatar": "^2.6.3",
     "react-hook-google-maps": "^0.0.3",
     "react-icons": "^4.2.0",
+    "react-live-clock": "^5.0.16",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-spinners": "^0.10.6",

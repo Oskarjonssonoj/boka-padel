@@ -2,7 +2,7 @@ import React from 'react'
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { AiOutlinePhone, AiOutlineFieldTime } from "react-icons/ai";
 import { GoMail } from "react-icons/go";
-import { BsTextLeft } from "react-icons/bs";
+import { CgWebsite } from "react-icons/cg";
 import { GiTennisCourt } from "react-icons/gi";
 
 const FacilityInfo = ({information}) => {
@@ -27,6 +27,10 @@ const FacilityInfo = ({information}) => {
         <div className="each-info-row">
             <GiTennisCourt />
             <p>{information.courts} st</p>
+        </div>
+        <div className="each-info-row">
+            <CgWebsite />
+            <p>{information.website}</p>
         </div>
         <div className="each-info-row">
             <p id="description">{information.description}</p>

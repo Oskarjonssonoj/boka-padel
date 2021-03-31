@@ -1,9 +1,12 @@
 .single-facility-section {
+    margin-right: 1rem;
     
     .facility-heading {
         color: white;
         display: flex;
         flex-direction: column;
+        border-bottom: solid white 2px;
+        padding-bottom: 1rem;
     }
 
     .facility-info {
@@ -11,6 +14,7 @@
         background-color: #8223e0;
         color: white;
         margin-top: 2rem;
+        border-radius: 0.25rem 0.25rem 0rem 0rem;
         padding: 1rem 0 1.5rem 0;
 
         .each-info-row {
@@ -27,7 +31,7 @@
             }
 
             #description {
-                margin-top: 1rem;
+                margin-top: 2rem;
                 margin-left: 0.5rem;
                 border-top: white solid 1px;
                 padding-top: 1.5rem;

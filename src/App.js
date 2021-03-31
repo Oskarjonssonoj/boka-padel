@@ -1,7 +1,7 @@
-import React from 'react';
+ import React from 'react';
 import {Route, BrowserRouter} from 'react-router-dom'
 import Header from './components/layout/Header';
-import MainPage from './components/mainpage/MainPage';
+import Booking from './components/booking/Booking';
 import './assets/styles/app.scss'
 
 
@@ -18,31 +18,31 @@ const App = () => {
       
       <AuthContextProvider>
 
-      <div className="main-app-page">
-          
-          <TopBorder />
-          <Header />
-          <Sidebar />
+        <BrowserRouter>
+        <div className="main-app-page">
+            
+            <TopBorder />
+            <Header />
+            <Sidebar />
 
-          <div className="content-section">
-            <BrowserRouter>
-              <div className="component-content-section">
-                <Route exact path="/">
-                  <MainPage />
-                </Route>
+            <div className="content-section">
+                <div className="component-content-section">
+                  <Route exact path="/">
+                    <Booking />
+                  </Route>
 
-                <Route exact path="/facilities">
-                  <Facilities />
-                </Route>
-                
-                <Route exact path="/facilities/:id">
-                  <Facility />
-                </Route>
-              </div>
-            </BrowserRouter>
+                  <Route exact path="/facilities">
+                    <Facilities />
+                  </Route>
+                  
+                  <Route exact path="/facilities/:id">
+                    <Facility />
+                  </Route>
+                </div>
+            </div>
+
           </div>
-
-        </div>
+        </BrowserRouter>
 
       </AuthContextProvider>
 		</div>
