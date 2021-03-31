@@ -31,11 +31,12 @@
     ul {
         list-style: none;
         display: flex;
+        justify-content: space-between;
         padding: 0;
+        width: 35rem;
 
         li {
             color: white;
-            margin: 0 4rem;
 
             a {
                 color: white;
@@ -45,7 +46,7 @@
 
             .active {
                 font-weight: bold;
-                transition: 0.5s;
+                transition: 0.2s;
             }
         }
     }
