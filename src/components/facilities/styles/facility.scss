@@ -1,0 +1,41 @@
+.single-facility-section {
+    
+    .facility-heading {
+        color: white;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .facility-info {
+        width: 20rem;
+        background-color: #8223e0;
+        color: white;
+        margin-top: 2rem;
+        padding: 1rem 0 1.5rem 0;
+
+        .each-info-row {
+            display: flex;
+            margin: 0.7rem 1rem;
+
+            svg {
+                width: 2rem;
+                margin-right: 1rem;
+            }
+
+            p {
+                font-size: 0.9rem;
+            }
+
+            #description {
+                margin-top: 1rem;
+                margin-left: 0.5rem;
+                border-top: white solid 1px;
+                padding-top: 1.5rem;
+                font-size: 0.8rem;
+            }
+        }
+    }
+}
+
+
+

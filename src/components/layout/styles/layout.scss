@@ -1,18 +1,29 @@
 .top-border {
-    border-width: 0.7rem 0 0;
-    border-top-style: solid;
-    border-image: linear-gradient(139deg, #fb8817, #ff4b01, #c12127, #e02aff) 3;
+    height: 0.7rem;
+    width: 100%;
+    background: linear-gradient(139deg, #fb8817, #ff4b01, #c12127, #e02aff), ;
+    animation: rotate 10s linear infinite;
+    filter: blur(20px)
+}
+
+@keyframes rotate {
+    0% {
+        filter: hue-rotate(0deg)
+    }
+    100% {
+        filter: hue-rotate(-360deg)
+    }
 }
 
 
 .header-section {
-    width: calc(100% - 20rem);
+    width: calc(100% - 17rem);
     height: 4rem;
     background-color: #210340;
     position: fixed;
     top: 0.6;
     z-index: 10;
-    margin-left: 20rem;
+    margin-left: 17rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -35,7 +46,7 @@
 }
 
 .sidebar-section {
-    width: 20rem;
+    width: 17rem;
     height: 100%;
     background-color: #210340;
     position: fixed;
@@ -60,10 +71,10 @@
         }
 
         img {
-            width: 3.5rem;
+            width: 3.2rem;
             position: absolute;
             z-index: 2;
-            right: 4.3rem;
+            right: 1.3rem;
             top: 0.5rem;
         }
     }

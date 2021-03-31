@@ -8,6 +8,8 @@ import './assets/styles/app.scss'
 import AuthContextProvider from './contexts/ContextComponent'
 import Sidebar from './components/layout/Sidebar';
 import TopBorder from './components/layout/TopBorder';
+import Facilities from './components/facilities/Facilities';
+import Facility from './components/facilities/Facility';
 
 const App = () => {
 
@@ -24,11 +26,19 @@ const App = () => {
 
           <div className="content-section">
             <BrowserRouter>
-
+              <div className="component-content-section">
                 <Route exact path="/">
                   <MainPage />
                 </Route>
 
+                <Route exact path="/facilities">
+                  <Facilities />
+                </Route>
+                
+                <Route exact path="/facilities/:id">
+                  <Facility />
+                </Route>
+              </div>
             </BrowserRouter>
           </div>
 
