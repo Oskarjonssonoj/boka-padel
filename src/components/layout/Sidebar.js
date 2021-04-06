@@ -89,7 +89,7 @@ const Sidebar = () => {
                     currentUser ? 
                     <>
                         <div>
-                            <Gravatar email={currentUser?.email} className="avatar"/>
+                            <Gravatar default="mp" email={currentUser?.email} className="avatar"/>
                         </div>
                         <div>
                             <p onClick={handleLogout}>Logga ut</p>
