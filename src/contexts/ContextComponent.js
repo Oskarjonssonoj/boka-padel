@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import { auth } from '../firebase/firebase.js'
+import { auth, db } from '../firebase/firebase.js'
 import { BounceLoader } from 'react-spinners'
 
 const AuthContext = createContext()
@@ -12,8 +12,22 @@ const AuthContextProvider = (props) => {
     const [currentUser, setCurrentUser] = useState(null)
     const [loading, setLoading] = useState(true)
 
-    const signup = (email, password) => {
-        return auth.createUserWithEmailAndPassword(email, password)
+    const signup = (email, password, firstName, lastName) => {
+        return auth.createUserWithEmailAndPassword(email, password).then(cred => {
+            db.collection('users').doc(cred.user.uid).set({
+                email,
+                password,
+                first_name: firstName,
+                last_name: lastName,
+                balance: 0,
+                address: null,
+                country: null,
+                gender: null,
+                phone: null,
+                date_of_birth: null,
+                user_id: cred.user.uid
+            })
+        })
     }
 
     const login = (email, password) => {

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { useAuth } from '../../contexts/ContextComponent'
 import Page from '../../shared/pages/Page'
+import './styles/login.scss'
 
 const Login = (props) => {
 
@@ -26,7 +27,7 @@ const Login = (props) => {
         try {
             setLoading(true)    
             await login(email, password)
-            navigate.push('/')
+            navigate.push('/profile')
         } catch (e) {
             setError("Email or password are invalid")
             setLoading(false)
@@ -36,41 +37,38 @@ const Login = (props) => {
 
     return (
         <Page title="Logga in">
-            <div className="login">
-                <div className="login-container"> 
-                    <form onSubmit={handleSubmit}>
-                        
-                        <h1>Log In</h1>
-                        
-                        <p className="error-msg">{error}</p>
-                        <div className="input-fields">
+            <div className="login"> 
+                <form onSubmit={handleSubmit}>
+                    <h1>Logga in</h1>
+                    
+                    <p className="error-msg">{error}</p>
+                    <div className="input-fields">
+                        <input 
+                                type="text" 
+                                autoFo  cus 
+                                required 
+                                value={email} 
+                                onChange={(e) => setEmail(e.target.value)} 
+                                placeholder="Epost..."
+                            /> 
+                            
                             <input 
-                                    type="text" 
-                                    autoFocus 
-                                    required 
-                                    value={email} 
-                                    onChange={(e) => setEmail(e.target.value)} 
-                                    placeholder="Email..."
-                                /> 
-                                
-                                <input 
-                                    type="password" 
-                                    required 
-                                    value={password} 
-                                    onChange={(e) => setPassword(e.target.value)} 
-                                    placeholder="Password..."
-                                /> 
+                                type="password" 
+                                required 
+                                value={password} 
+                                onChange={(e) => setPassword(e.target.value)} 
+                                placeholder="Lösenord..."
+                            /> 
+                    </div>
+                    
+                    <div className="btn-container">
+                        <div className="btns">
+                            <button disabled={loading} id="sign-in">Logga in</button>
+                            <Link to="/register"><button disabled={loading}>Registera dig</button></Link>
                         </div>
-                        
-                        <div className="btn-container">
-                            <div className="btns">
-                                <button disabled={loading} id="sign-in">Log in</button>
-                                <Link to="/register"><button disabled={loading}>Register</button></Link>
-                            </div>
-                            <p>Forgot your password? Click <Link to="/reset-password">Here</Link></p>
-                        </div>
-                    </form>
-                </div>
+                        <p>Har du glömt bort ditt lösenord? Klicka <Link to="/reset-password">här</Link></p>
+                    </div>
+                </form>
             </div>
         </Page>
     )

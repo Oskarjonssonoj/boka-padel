@@ -30,6 +30,11 @@ const Sidebar = () => {
         history.push("/")
     }
 
+    const handleLogout = async () => {
+        logout()
+        history.push('/')
+    }
+
     return (
         <div className="sidebar-section">
             <div className="sidebar-upper-section">
@@ -84,10 +89,10 @@ const Sidebar = () => {
                     currentUser ? 
                     <>
                         <div>
-                            <Gravatar email={'oskar.jonsson13@gmail.com'} className="avatar"/>
+                            <Gravatar email={currentUser?.email} className="avatar"/>
                         </div>
                         <div>
-                            <p onClick={() => logout()}>Logga ut</p>
+                            <p onClick={handleLogout}>Logga ut</p>
                             <AiOutlineLogin />
                         </div>
                     </>
