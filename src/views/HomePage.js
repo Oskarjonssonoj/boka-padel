@@ -7,8 +7,15 @@ import Sidebar from '../components/layout/Sidebar';
 import TopBorder from '../components/layout/TopBorder';
 import Facilities from '../components/facilities/Facilities';
 import Facility from '../components/facilities/Facility';
+import Login from '../components/login/Login';
+import { useAuth } from '../contexts/ContextComponent';
 
 const HomePage = () => {
+    
+    const {currentUser} = useAuth()
+
+    console.log(currentUser)
+    
     return (
         <>
             <TopBorder />
@@ -27,6 +34,10 @@ const HomePage = () => {
                     
                     <Route path="/facilities/:id">
                         <Facility />
+                    </Route>
+
+                    <Route path="/login">
+                        <Login />
                     </Route>
                 </div>
             </div>        

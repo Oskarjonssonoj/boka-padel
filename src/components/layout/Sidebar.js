@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 import './styles/layout.scss'
 import { AiOutlineLogin } from "react-icons/ai";
 import Gravatar from "react-gravatar";
 import Logo from '../../assets/images/logo.png'
 import moment from 'moment';
 import 'react-calendar/dist/Calendar.css'
+import { useAuth } from '../../contexts/ContextComponent';
 
 const Sidebar = () => {
 
@@ -14,6 +15,8 @@ const Sidebar = () => {
     const [date, setDate] = useState(moment().format('D MMM'))
 
     const history = useHistory()
+
+    const {currentUser, logout} = useAuth()
 
     useEffect(() => {
         setInterval(() => {
@@ -77,13 +80,25 @@ const Sidebar = () => {
             </div>
 
             <div className="profile-section">
-                <div>
-                    <Gravatar email={'oskar.jonsson13@gmail.com'} className="avatar"/>
-                </div>
-                <div>
-                    <p>Logout</p>
-                    <AiOutlineLogin />
-                </div>
+                {
+                    currentUser ? 
+                    <>
+                        <div>
+                            <Gravatar email={'oskar.jonsson13@gmail.com'} className="avatar"/>
+                        </div>
+                        <div>
+                            <p onClick={() => logout()}>Logga ut</p>
+                            <AiOutlineLogin />
+                        </div>
+                    </>
+
+                    :
+
+                    <div className="sidebar-login">
+                        <Link to="/login">Logga in</Link>
+                        <AiOutlineLogin />
+                    </div>
+                }
             </div>
         </div>
     )
