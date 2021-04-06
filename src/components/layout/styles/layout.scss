@@ -17,13 +17,13 @@
 
 
 .header-section {
-    width: calc(100% - 17rem);
+    width: calc(100% - 19rem);
     height: 4rem;
     background-color: #210340;
     position: fixed;
     top: 0.6;
     z-index: 10;
-    margin-left: 17rem;
+    margin-left: 19rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -34,26 +34,25 @@
         justify-content: space-between;
         padding: 0;
         width: 35rem;
-
-        li {
+        
+        a {
             color: white;
-
-            a {
+            text-decoration: none;
+            cursor: pointer;
+    
+            li {
                 color: white;
-                text-decoration: none;
-                cursor: pointer;
             }
-
-            .active {
-                font-weight: bold;
-                transition: 0.2s;
-            }
+        }
+        .active {
+            font-weight: bold;
+            transition: 0.2s;
         }
     }
 }
 
 .sidebar-section {
-    width: 17rem;
+    width: 19rem;
     height: 100%;
     background-color: #210340;
     position: fixed;
@@ -75,13 +74,14 @@
 
         h1 {
             z-index: 3;
+            cursor: pointer;
         }
 
         img {
             width: 3.2rem;
             position: absolute;
             z-index: 2;
-            right: 1.3rem;
+            right: 3.3rem;
             top: 0.5rem;
         }
     }
@@ -99,6 +99,62 @@
 
         p:last-child {
             font-weight: normal;
+        }
+    }
+
+    .open-bookings-section {
+        margin-top: 4rem;
+        margin-left: 2rem;
+
+        h4 {
+            color: white;
+        }
+
+        .open-bookings-container {
+            width: 15rem;
+            height: 20rem;
+            overflow-y: scroll;
+            background-color: #360568;
+            margin-top: 0.7rem;
+            border: #6221a2 solid 1px;
+            border-radius: 0.25rem;
+
+            ul {
+                list-style: none;
+                color: white;
+                margin: 0.5rem;
+                position: relative;
+
+                li {
+                    height: 4rem;
+                    width: 99%;
+                    background-color: #6d30ab;
+                    margin-bottom: 0.7rem;
+                    border: #924ada solid 1px;
+                    border-radius: 0.25rem;
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: flex-end;
+
+                    button {
+                        margin: 0 0.4rem 0.4rem 0;
+                        width: 3.5rem;
+                        height: 1.2rem;
+                        border-radius: 0.25rem;
+                        border: none;
+                        color: white;
+                        background-color: green;
+                        font-size: 0.7rem;
+                        outline: none;
+                        cursor: pointer;
+                        transition: 0.3s;
+                    }
+
+                    button:hover {
+                        background-color: #00c600;
+                    }
+                }
+            }
         }
     }
 

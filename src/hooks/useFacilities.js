@@ -12,6 +12,7 @@ const useFacilities = () => {
 		const unmount = db.collection('facilities').onSnapshot(snapshot => {
 				setLoading(true)
 				const renderSnapFacilities = []
+				let i = 0
 
 				snapshot.forEach(doc => {
 					renderSnapFacilities.push({

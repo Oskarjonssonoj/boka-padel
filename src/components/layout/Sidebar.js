@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useHistory } from 'react-router-dom'
 import './styles/layout.scss'
 import { AiOutlineLogin } from "react-icons/ai";
@@ -9,7 +9,7 @@ import 'react-calendar/dist/Calendar.css'
 
 const Sidebar = () => {
 
-    const [time, setTime] = useState(moment().format('hh:mm:ss'))
+    const [time, setTime] = useState(moment().format('HH:mm:ss'))
     const [currentDay, setCurrentDay] = useState(moment().format('ddd'))
     const [date, setDate] = useState(moment().format('D MMM'))
 
@@ -17,7 +17,7 @@ const Sidebar = () => {
 
     useEffect(() => {
         setInterval(() => {
-            setTime(moment().format('hh:mm:ss'))
+            setTime(moment().format('HH:mm:ss'))
             setCurrentDay(moment().format('ddd'))
             setDate(moment().format('D MMM'))
         }, 1000)
@@ -36,9 +36,43 @@ const Sidebar = () => {
                 </div>
 
                 <div className="time-info-section">
-                    <p>{currentDay}</p>
-                    <p>{date}</p>
+                    <p>{currentDay} {date}</p>
                     <p>{time}</p>
+                </div>
+
+                <div className="open-bookings-section">
+                    <h4>Lediga Tider - {currentDay} {date}</h4>
+                    <div className="open-bookings-container" id="your_div">
+                        <ul>
+                            <li>
+                                <button>Boka</button>
+                            </li>
+                            <li>
+                                <button>Boka</button>
+                            </li>
+                            <li>
+                                <button>Boka</button>
+                            </li>
+                            <li>
+                                <button>Boka</button>
+                            </li>
+                            <li>
+                                <button>Boka</button>
+                            </li>
+                            <li>
+                                <button>Boka</button>
+                            </li>
+                            <li>
+                                <button>Boka</button>
+                            </li>
+                            <li>
+                                <button>Boka</button>
+                            </li>
+                            <li>
+                                <button>Boka</button>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 

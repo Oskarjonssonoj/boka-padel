@@ -1,15 +1,15 @@
 import React from 'react'
-import { startOfURL, atHomePage } from '../../shared/helpers/UrlHelper'
+import { endOfURL, startOfURL } from '../../shared/helpers/UrlHelper'
 import {NavLink} from 'react-router-dom'
 import './styles/layout.scss'
 
-const Header = () => {
+const Header = (props) => {
     return (
         <div className="header-section">
             <ul>
-                <li><NavLink className={startOfURL() === "" ? "active" : ""} exact to="/">Sök Tider</NavLink></li>
-                <li><NavLink className={startOfURL() === "facilities" ? "active" : ""} exact to="/facilities">Anläggningar</NavLink></li>
-                <li><NavLink className={startOfURL() === "profile" ? "active" : ""} exact to="/profile">Min Profil</NavLink></li>
+                <NavLink className={startOfURL() === undefined ? "active" : ""} exact to="/"><li>Sök Tider</li></NavLink>
+                <NavLink className={startOfURL() === 'facilities' ? "active" : ""} exact to="/facilities"><li>Anläggningar</li></NavLink>
+                <NavLink className={startOfURL() === 'profile' ? "active" : ""} exact to="/profile"><li>Min Profil</li></NavLink>
             </ul>
         </div>
     )
