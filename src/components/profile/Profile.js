@@ -74,13 +74,13 @@ const Profile = () => {
                                     <td>hej</td>
                                     <td>hej</td>
                                     <td>hej</td>
-                                    <td>hej <ImCross/></td>
+                                    <td><p>hej <ImCross/></p></td>
                                 </tr>
                                 <tr>
                                     <td>hej</td>
                                     <td>hej</td>
                                     <td>hej</td>
-                                    <td>hej <ImCross/></td>
+                                    <td><p>hej <ImCross/></p></td>
                                 </tr>
                             </tbody>
                         </table>
