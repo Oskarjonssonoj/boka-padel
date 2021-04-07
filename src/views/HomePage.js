@@ -11,6 +11,7 @@ import Login from '../components/login/Login';
 import { useAuth } from '../contexts/ContextComponent';
 import Profile from '../components/profile/Profile';
 import Register from '../components/register/Register';
+import EditProfile from '../components/profile/EditProfile';
 
 const HomePage = () => {
     
@@ -48,6 +49,10 @@ const HomePage = () => {
 
                     <Route exact path="/profile">
                         <Profile />
+                    </Route>                    
+
+                    <Route path="/profile/edit">
+                        <EditProfile />
                     </Route>                    
                 </div>
             </div>        

@@ -8,3 +8,12 @@
         width: 5rem;
     }
 }
+
+.small-loader { 
+    display: flex;
+    justify-content: center;
+    margin-top: 0.7rem;
+    img {
+        width: 1.6rem;
+    }
+}

@@ -49,7 +49,7 @@ const Sidebar = () => {
                 </div>
 
                 <div className="open-bookings-section">
-                    <h4>Lediga Tider - {currentDay} {date}</h4>
+                    <h4>Dagens tider - {currentDay} {date}</h4>
                     <div className="open-bookings-container" id="your_div">
                         <ul>
                             <li>

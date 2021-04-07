@@ -8,13 +8,14 @@ import { MdFavorite } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { FaRegEdit } from "react-icons/fa";
 import ProfileInfo from './ProfileInfo';
-import { BiCalendar } from "react-icons/bi";
-import { ImCross } from "react-icons/im";
+import Bookings from './Bookings';
 
 const Profile = () => {
 
     const {currentUser} = useAuth()
     const {user} = useUser(currentUser.uid)
+
+    console.log(user)
 
     return (
         <div className="profile-section">
@@ -25,7 +26,7 @@ const Profile = () => {
                     <h3>{user?.first_name} {user?.last_name}</h3>
                 </div>
                 <div className="edit-user">
-                    <Link to="">
+                    <Link to="/profile/edit">
                         <FaRegEdit />
                         <p>Redigera profil</p>
                     </Link>
@@ -54,37 +55,7 @@ const Profile = () => {
                 </div>
 
                 <div className="right-section">
-                    <div className="bookings-section">
-                        <div className="header">
-                            <BiCalendar />
-                            <h5>Bokade tider</h5>
-                        </div>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th id="place">Plats</th>
-                                    <th id="time">Datum / Tid</th>
-                                    <th id="rest">Bana</th>
-                                    <th id="rest">Kod</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <tr>
-                                    <td>hej</td>
-                                    <td>hej</td>
-                                    <td>hej</td>
-                                    <td><p>hej <ImCross/></p></td>
-                                </tr>
-                                <tr>
-                                    <td>hej</td>
-                                    <td>hej</td>
-                                    <td>hej</td>
-                                    <td><p>hej <ImCross/></p></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <Bookings bookings={user?.bookings}/>
                 </div>
             </div>
 
