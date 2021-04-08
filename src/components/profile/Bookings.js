@@ -4,6 +4,7 @@ import { BiCalendar } from "react-icons/bi";
 import { ImCross } from "react-icons/im";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import SmallLoader from '../../shared/components/loading/SmallLoader';
+import Animate from 'react-smooth'
 
 const Bookings = ({bookings}) => {
     return (
@@ -36,6 +37,7 @@ const Bookings = ({bookings}) => {
                             bookings &&
                             bookings.map(booking => {
                                 return (
+                                    <Animate to="1" from="0" attributeName="opacity">
                                     <tr>
                                         <td className="logo-and-facility">
                                             <img alt="logo" src={booking.logo}/>
@@ -61,15 +63,20 @@ const Bookings = ({bookings}) => {
                                             <ImCross className="remove"/>
                                         </td>
                                     </tr>
+                                    </Animate>
                                 )
                             })
                         }
                     </tbody>
                 </table>
                 : 
-                <div className="no-bookings">
-                    <p>Du har inga kommande bokningar, klicka <Link to="/">här</Link> för att boka</p>
-                </div>
+                <>
+                    <Animate to="1" from="0" attributeName="opacity">
+                        <div className="no-bookings">
+                            <p>Du har inga kommande bokningar, klicka <Link to="/">här</Link> för att boka</p>
+                        </div>
+                    </Animate>
+                </>
             }
         </div>
     )

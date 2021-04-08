@@ -22,6 +22,8 @@ const Facility = () => {
              user.favorites.forEach(favorite => {
                  if(favorite.id === facility.id) {
                      setFavorite(true)
+                 } else {
+                     setFavorite(false)
                  }
              })
         }
@@ -42,9 +44,11 @@ const Facility = () => {
                 if(favorite.id === facility.id) {
                     copy.favorites = user.favorites.filter(item => item.id !== facility.id)
                     db.collection('users').doc(currentUser.uid).update(copy)
+                    return
                 } else {
                     copy.favorites.push(facility);
                     db.collection('users').doc(currentUser.uid).update(copy)
+                    return
                 }
             })
         }
