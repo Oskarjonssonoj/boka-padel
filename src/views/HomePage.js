@@ -8,17 +8,11 @@ import TopBorder from '../components/layout/TopBorder';
 import Facilities from '../components/facilities/Facilities';
 import Facility from '../components/facilities/Facility';
 import Login from '../components/login/Login';
-import { useAuth } from '../contexts/ContextComponent';
 import Profile from '../components/profile/Profile';
 import Register from '../components/register/Register';
 import EditProfile from '../components/profile/EditProfile';
 
 const HomePage = () => {
-    
-    const {currentUser} = useAuth()
-
-    console.log(currentUser)
-
     return (
         <>
             <TopBorder />

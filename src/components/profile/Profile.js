@@ -10,13 +10,12 @@ import { FaRegEdit } from "react-icons/fa";
 import ProfileInfo from './ProfileInfo';
 import Bookings from './Bookings';
 import Page from '../../shared/pages/Page'
+import FavoriteFacilities from './FavoriteFacilities';
 
 const Profile = () => {
 
     const {currentUser} = useAuth()
     const {user} = useUser(currentUser.uid)
-
-    console.log(user)
 
     return (
         <Page title="Min Profil">
@@ -41,6 +40,10 @@ const Profile = () => {
                             <div className="header">
                                 <MdFavorite />
                                 <h5>Favoritanläggningar</h5>
+                            </div>
+
+                            <div className="body">
+                                <FavoriteFacilities favorites={user?.favorites}/>
                             </div>
                         </div>
 

@@ -7,6 +7,22 @@
         flex-direction: column;
         border-bottom: solid white 2px;
         padding-bottom: 1rem;
+
+        .name-and-favorite {
+            display: flex;
+            align-items: center;
+
+            svg {
+                font-size: 1.4rem;
+                margin-top: 0.4rem;
+                margin-left: 1rem;
+                cursor: pointer;
+                transition: 0.4s;
+            }
+            .favorite {
+                color: red;
+            }
+        }
     }
 
     .facility-info {

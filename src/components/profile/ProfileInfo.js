@@ -15,7 +15,7 @@ const ProfileInfo = ({user}) => {
                     user?.address ?
                     <p>{user.address}</p>
                     : 
-                    <Link to="">Redigera adress</Link>
+                    <Link to="/profile/edit">Redigera adress</Link>
                 }
         </div>
         <div className="each-info-row">
@@ -24,7 +24,7 @@ const ProfileInfo = ({user}) => {
                     user?.phone ?
                     <p>{user.phone}</p>
                     : 
-                    <Link to="">Redigera telefonnummer</Link>
+                    <Link to="/profile/edit">Redigera telefonnummer</Link>
                 }
         </div>
         <div className="each-info-row">
@@ -33,7 +33,7 @@ const ProfileInfo = ({user}) => {
                     user?.email ?
                     <p>{user.email}</p>
                     : 
-                    <Link to="">Redigera e-postadress</Link>
+                    <Link to="/profile/edit">Redigera e-postadress</Link>
                 }
         </div>
         <div className="each-info-row">
@@ -42,7 +42,7 @@ const ProfileInfo = ({user}) => {
                     user?.gender ?
                     <p>{user.gender}</p>
                     : 
-                    <Link to="">Ange kön</Link>
+                    <Link to="/profile/edit">Ange kön</Link>
                 }
         </div>
         <div className="each-info-row">
@@ -51,7 +51,7 @@ const ProfileInfo = ({user}) => {
                     user?.date_of_birth ?
                     <p>{user.date_of_birth}</p>
                     : 
-                    <Link to="">Ange födelsedatum</Link>
+                    <Link to="/profile/edit">Ange födelsedatum</Link>
                 }
         </div>
     </>

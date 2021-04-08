@@ -103,6 +103,61 @@
                         margin-left: 0.4rem;
                     }
                 }
+
+                .body {
+
+                    .each-favorite {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        margin: 0.7rem 1rem 0.7rem 0.5rem;
+            
+                        img {
+                            width: 3rem;
+                            margin-right: 0.5rem;
+                            border: solid white 2px;
+                            border-radius: 0.25rem;
+                        }
+            
+                        p, a {
+                            font-size: 0.8rem;
+                        }
+        
+                        a {
+                            color: lightblue;
+                            text-decoration: none;
+                            transition: 0.4s;
+                        }
+    
+                        a:hover {
+                            color: #e9eaeb;
+                        }
+
+                        .logo-and-name {
+                            display: flex;
+                            align-items: center;
+                            .name-and-location {
+    
+                                div {
+                                    display: flex;
+                                    font-size: 0.8rem;
+                                    align-items: center;
+                                    margin-top: 0.2rem;
+    
+                                    p {
+                                        font-size: 0.7rem;
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+
+                    .no-favorites {
+                        font-size: 0.8rem;
+                        padding: 0.5rem;
+                    }
+                }
             }
     
             .user-info-section {
