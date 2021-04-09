@@ -1,12 +1,71 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
+import { db } from '../../firebase/firebase';
+import { useAuth } from '../../contexts/ContextComponent';
 import { BiCalendar } from "react-icons/bi";
 import { ImCross } from "react-icons/im";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import SmallLoader from '../../shared/components/loading/SmallLoader';
 import Animate from 'react-smooth'
+import useFacility from '../../hooks/useFacility'
 
-const Bookings = ({bookings}) => {
+const Bookings = ({user}) => {
+
+    const [facilityId, setFacilityId] = useState()
+    const [cancelBooking, setCancelBooking] = useState(false)
+    const [selectedIndex, setSelectedIndex] = useState({
+        court_name_index: null,
+        booking_id: null,
+        list_id: null
+    })
+
+    const { facility } = useFacility(facilityId)
+    const {currentUser} = useAuth()
+
+    const getFacilityBooking = (index, facility_id, booking_id) => {
+        setFacilityId(facility_id)
+        setSelectedIndex(selectedIndexes => ({
+            ...selectedIndexes,
+            court_name_index: user?.bookings[index].court,
+            booking_id: booking_id,
+            list_id: index
+        }))
+        setCancelBooking(true)
+    }
+
+    const closeCancelBooking = () => {
+        setCancelBooking(false)
+    }
+
+    const confirmCancelBooking = () => {
+        let facilityCopy = ({ ...facility });
+        let userCopy = ({ ...user });
+
+        facilityCopy =
+        facilityCopy.appointments.forEach(appointment => {
+            if(appointment.name === selectedIndex.court_name_index) {
+                
+                userCopy.bookings.forEach(booking => {
+                    if(booking.court === selectedIndex.court_name_index) {                    
+                        
+                        if(booking.information.time_id == selectedIndex.booking_id) {
+            
+                            appointment.times.forEach(time => {
+                                if(booking.information.time_id === time.time_id) {
+                                    time.booked = false
+                                    userCopy.bookings.splice(selectedIndex.list_id)
+                                    
+                                    db.collection('facilities').doc(facilityId).update(facilityCopy)
+                                    db.collection('users').doc(currentUser.uid).update(userCopy)
+                                }
+                            })
+                        }
+                    }
+                })
+            }
+        })
+    }
+
     return (
         <div className="bookings-section">
             <div className="header">
@@ -14,12 +73,12 @@ const Bookings = ({bookings}) => {
                 <h5>Bokade tider</h5>
             </div>
             {
-                !bookings ?
+                !user?.bookings ?
                 <SmallLoader />
 
                 :
 
-                bookings?.length > 1 ? 
+                user?.bookings.length >= 1 ? 
 
                 <table>
                     <thead>
@@ -34,8 +93,8 @@ const Bookings = ({bookings}) => {
 
                     <tbody>
                         {
-                            bookings &&
-                            bookings.map(booking => {
+                            user &&
+                            user.bookings.map((booking, index) => {
                                 return (
                                     <Animate to="1" from="0" attributeName="opacity">
                                     <tr>
@@ -59,8 +118,8 @@ const Bookings = ({bookings}) => {
                                         <td>
                                             <p>{booking.code}</p>
                                         </td>
-                                        <td>
-                                            <ImCross className="remove"/>
+                                        <td index={index}>
+                                            <ImCross className="remove" onClick={(e) => getFacilityBooking(index, booking.facility_id, booking.information.time_id)}/>
                                         </td>
                                     </tr>
                                     </Animate>
@@ -78,6 +137,21 @@ const Bookings = ({bookings}) => {
                     </Animate>
                 </>
             }
+           {
+                cancelBooking &&
+                <Animate to="1" from="0" attributeName="opacity" duration="300">
+                    <div className="cancel-booking">
+                        <Animate to="1" from="0" attributeName="opacity" duration="1000">
+                            <div className="cancel-booking-window">
+                                <div>
+                                    <button onClick={closeCancelBooking}>Avbryt</button>
+                                    <button onClick={confirmCancelBooking}>Bekräfta avbokning</button>
+                                </div>
+                            </div>
+                        </Animate>
+                    </div>
+                </Animate>
+           }
         </div>
     )
 }

@@ -60,7 +60,7 @@ const Profile = () => {
                     </div>
 
                     <div className="right-section">
-                        <Bookings bookings={user?.bookings}/>
+                        <Bookings user={user}/>
                     </div>
                 </div>
 

@@ -237,6 +237,28 @@
                     }
                 }
 
+                .cancel-booking {
+                    position: absolute;
+                    left: 0;
+                    z-index: 12;
+                    top: 0;
+                    width: 100%;
+                    height: 100vh;
+                    background-color: #000000a4;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+    
+                    .cancel-booking-window {
+                        width: 30rem;
+                        height: 20rem;
+                        border-radius: 0.3rem;
+                        background: #a65df0;
+                        border: solid #ffffffa4 1px;
+                        position: relative;
+                    }
+                }
+
                 .no-bookings {
                     font-size: 0.8rem;
                     padding: 0.5rem;

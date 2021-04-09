@@ -10,6 +10,7 @@ import { db } from '../../firebase/firebase';
 import useUser from '../../hooks/useUser'
 import { useAuth } from '../../contexts/ContextComponent';
 import { AiOutlineHeart } from "react-icons/ai";
+import Calendar from './Calendar'
 
 const Facility = () => {
     const { id } = useParams()
@@ -65,23 +66,26 @@ const Facility = () => {
                     facility && 
                     <Page title={facility?.name}>
                         <div className="single-facility-section">
-                            <div className="facility-heading">
-                                <div className="name-and-favorite">
-                                    <h1>{facility.name}</h1>
-                                    <AiOutlineHeart className={favorite ? "favorite" : ""} onClick={handleFavorite}/>
-                                </div>
-                                <h3>{facility.location}</h3>
-                            </div>
-                            <div>
-                                <div>
-                                    <div className="facility-info">
-                                        <FacilityInfo information={facility}/>
+                                <div className="facility-heading">
+                                    <div className="name-and-favorite">
+                                        <h1>{facility.name}</h1>
+                                        <AiOutlineHeart className={favorite ? "favorite" : ""} onClick={handleFavorite}/>
                                     </div>
-                                    <GoogleMaps name={facility.name}/>
+                                    <h3>{facility.location}</h3>
                                 </div>
-                                
+                                <div className="single-content-section">
+                                    <div>
+                                        <div className="facility-info">
+                                            <FacilityInfo information={facility}/>
+                                        </div>
+                                        <GoogleMaps name={facility.name}/>
+                                    </div>
+                                    
+                                    <div className="facility-calendar">
+                                        <Calendar calendar={facility?.appointments} user={user}/>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
                     </Page>
                 }
         </>
