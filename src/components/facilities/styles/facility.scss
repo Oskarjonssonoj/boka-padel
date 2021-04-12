@@ -5,7 +5,7 @@
         color: white;
         display: flex;
         flex-direction: column;
-        border-bottom: solid white 2px;
+        border-bottom: solid white 1.5px;
         padding-bottom: 1rem;
 
         .name-and-favorite {
@@ -31,7 +31,9 @@
 
         .facility-info {
             width: 20rem;
-            background-color: #8223e0;
+            background-color: #7412b6;
+            border: 1px solid #9758c2;
+            border-bottom: none;
             color: white;
             margin-top: 2rem;
             border-radius: 0.25rem 0.25rem 0rem 0rem;
@@ -68,13 +70,19 @@
 
             .facility-calendar-content {
                 width: 100%;
-                height: 15rem;
+                min-height: 15rem;
                 font-size: 0.8rem;
                 color: white;
+                background-color: #7412b6;
+                border: 1px solid #9758c2;
+                border-radius: 0.25rem;
+                padding-top: 1rem;
+                padding-right: 1rem;
 
                 table {
                     border-spacing: 7px;
                     width: 100%;
+                    font-size: 0.7rem;
 
                     th {
                         text-align: start;
@@ -103,18 +111,29 @@
                     }
 
                     .open{
-                        background: #8223e0;
+                        background: #b069f7;
+                        border: #ffffff57 solid 1.5px;
                     }
                         .open:hover{
                             background: #a879d8;
                         }
 
                     .booked{
+                        border: #ffffff57 solid 1.5px;
                         background: #db2a2a;
                         cursor: not-allowed;
                     }
                     .booked:hover {
                         background: #e75a5a;
+                    }
+
+                    #own-booking {
+                        border: #ffffff57 solid 1.5px;
+                        background: #e4e42c;
+                    }
+
+                    #own-booking:hover {
+                        background: #f0f084;
                     }
                 }
             }

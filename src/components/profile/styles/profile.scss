@@ -227,6 +227,10 @@
                     padding: 0.8rem 0.5rem;
                     align-items: center;
                     border-bottom: 1px solid #9758c2;
+
+                    span {
+                        font-weight: bolder;
+                    }
         
                     svg {
                         font-size: 1.2rem;
@@ -251,11 +255,146 @@
     
                     .cancel-booking-window {
                         width: 30rem;
-                        height: 20rem;
+                        min-height: 35rem;
                         border-radius: 0.3rem;
                         background: #a65df0;
                         border: solid #ffffffa4 1px;
                         position: relative;
+                        display: flex;
+                        flex-direction: column;
+
+                        .header {
+                            background: #5a199b;
+                            border-bottom: solid #ffffffa4 1px;
+                            border-radius: 0.3rem 0.3rem 0rem 0rem;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            padding: 0 1.5rem;
+                            height: 4rem;
+    
+                            h5 {
+                                margin: 0;
+                                font-size: 1rem;
+                            }
+    
+                            svg {
+                                font-size: 1rem;
+                                cursor: pointer;
+                            }
+                        }
+
+                        .body {
+                            display: flex;
+                            flex-direction: column;
+                            padding: 0 1rem;
+    
+                            .first-row, .second-row, .third-row {
+                                display: flex;
+                                
+                                justify-content: space-between;
+                                padding: 1rem 0rem;
+                                border-bottom: solid #ffffffa4 1px;
+                                flex-direction: column;
+
+                                p {
+                                    font-size: 0.8rem;
+                                }
+
+                                span {
+                                    font-weight: bold;
+                                    margin-right:0.3rem;
+                                }
+    
+                                div {
+                                    display: flex;
+                                    align-items: center;
+                                    padding: 0 0.5rem;
+                                    margin-bottom: 1rem;
+    
+                                    svg {
+                                        margin-right: 0.6rem;
+                                        font-size: 1.2rem;
+                                    }
+                                }
+
+                                div:last-child {
+                                    margin-bottom: 0;
+                                }
+                            }
+
+                            .second-row, .third-row {
+                                padding-left: 0.5rem;
+                                padding-right: 0.5rem;
+
+                                p {
+                                    margin: 0.2rem 0;
+                                }
+
+                                .confirm {
+                                    display: flex;
+                                    align-items: center;
+
+                                    input {
+                                        margin-left: 1rem;
+                                        cursor: pointer;
+                                    }
+                                }
+                            }
+
+                            .buttons-section {
+                                position: absolute;
+                                bottom: 1rem;
+                                right: 1rem;
+                                display: flex;
+        
+                                button {
+                                    min-width: 5rem;
+                                    height: 2rem;
+                                    border-radius: 0.25rem;
+                                    border: none;
+                                    padding: 0 0.5rem;
+                                    font-weight: bold;
+                                    color: white;
+                                    background-color: #979797dc;
+                                    cursor: pointer;
+                                    transition: 0.3s;
+                                    outline: none;
+
+                                    img {
+                                        width: 1rem;
+                                    }
+                                }
+        
+                                button:hover {
+                                    background-color: #979797b2;
+                                }
+        
+                                button:first-child {
+                                    margin-right: 1rem;
+                                }
+        
+                                button:disabled,
+                                button[disabled]{
+                                    background-color: #0181013b;
+                                    cursor: not-allowed;
+                                }
+        
+                                button:disabled,
+                                button[disabled]:hover{
+                                    background-color: #0181013b;
+                                }
+        
+                                .confirm {
+                                    background-color: #dd0000;
+                                    color: white;
+                                }
+                                .confirm:hover {
+                                    background-color: #ff4a4abe;
+                                }
+                            }
+                        }
+
                     }
                 }
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { db } from '../../firebase/firebase';
-import { useParams, history, useHistory } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import { useAuth } from '../../contexts/ContextComponent';
 import { AiFillCloseCircle, AiFillCalendar, AiFillClockCircle, AiFillCreditCard } from "react-icons/ai";
 import { HiLocationMarker } from "react-icons/hi";
@@ -38,7 +38,7 @@ const Calendar = ({user}) => {
 
     const handleChoice = (e, index, timeIndex, time) => {
 
-        if(e.target.id === "booked") {
+        if(e.target.id === "booked" || e.target.id === "own-booking") {
             return
         } else {
             let copy = ({ ...facility });
@@ -72,15 +72,26 @@ const Calendar = ({user}) => {
         
 
         try {
-            facilityCopy.appointments[selectedIndexes.court_name_index].times[selectedIndexes.time_index].booked = true
-            userCopy.bookings.push(confirmSelectedTime)
+            if(userCopy.balance > facilityCopy.appointments[selectedIndexes.court_name_index].times[selectedIndexes.time_index].price) {
+
+                facilityCopy.appointments[selectedIndexes.court_name_index].times[selectedIndexes.time_index].booked = true
+                facilityCopy.appointments[selectedIndexes.court_name_index].times[selectedIndexes.time_index].user_id = currentUser.uid
+
+                userCopy.bookings.push(confirmSelectedTime)
+
+                userCopy.balance = userCopy.balance - facilityCopy.appointments[selectedIndexes.court_name_index].times[selectedIndexes.time_index].price
+
+                    await db.collection('facilities').doc(id).update(facilityCopy)
+                    await db.collection('users').doc(currentUser.uid).update(userCopy)
+                
+                setSelectedTime(false)
+    
+                history.push('/profile')
+            } else {
+                return
+            }
             
-            await db.collection('facilities').doc(id).update(facilityCopy)
-            await db.collection('users').doc(currentUser.uid).update(userCopy)
 
-            setSelectedTime(false)
-
-            history.push('/profile')
         } catch {
             console.log("Error")
         }    
@@ -131,7 +142,7 @@ const Calendar = ({user}) => {
                                             court.times.map((time, timeIndex) => {
                                                 return(
                                                     time.booked ?
-                                                    <td key={timeIndex} index={timeIndex} id={"booked"} className="booked" onClick={(e) => handleChoice(e, index, timeIndex)}></td>
+                                                    <td key={timeIndex} index={timeIndex} id={time.user_id === currentUser.uid ? "own-booking" : "booked"} className="booked" onClick={(e) => handleChoice(e, index, timeIndex)}></td>
                                                     : 
                                                     <td key={timeIndex} index={timeIndex} className="open" onClick={(e) => handleChoice(e, index, timeIndex, time)}></td>
                                                 )
