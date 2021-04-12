@@ -63,6 +63,7 @@ const Bookings = ({user}) => {
 
     const closeCancelBooking = () => {
         setCancelBooking(false)
+        setConfirm(true)
     }
 
     const confirmPayment = (e) => {
@@ -100,8 +101,9 @@ const Bookings = ({user}) => {
                                     userCopy.balance = userCopy.balance + time.price
 
                                         db.collection('facilities').doc(facilityId).update(facilityCopy)
-                                        db.collection('users').doc(currentUser.uid).update(userCopy)
+                                        db.collection('users').doc(currentUser?.uid).update(userCopy)
 
+                                        setConfirm(true)
                                         setProcessing(false)
                                         setCancelBooking(false)
                                     }
@@ -149,7 +151,7 @@ const Bookings = ({user}) => {
                                         <td className="logo-and-facility">
                                             <img alt="logo" src={booking.logo}/>
                                             <div>
-                                                <p>{booking.facility}</p>
+                                                <Link to={`/facilities/${booking.facility_id}`}>{booking.facility}</Link>
                                                 <p className="location">
                                                     <HiOutlineLocationMarker className="location"/>
                                                     {booking.city}

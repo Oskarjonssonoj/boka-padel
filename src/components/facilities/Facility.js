@@ -16,18 +16,19 @@ const Facility = () => {
     const { id } = useParams()
     const { facility, loading } = useFacility(id)
     const {currentUser} = useAuth()
-    const {user} = useUser(currentUser.uid)
+    const {user} = useUser(currentUser?.uid)
 
     useEffect(() => {
-        if(user) {
-             user.favorites.forEach(favorite => {
-                 if(favorite.id === facility.id) {
-                     setFavorite(true)
-                 } else {
-                     setFavorite(false)
-                 }
-             })
-        }
+        user?.favorites?.forEach(favorite => {
+            console.log(favorite)
+            if(favorite.id === facility.id) {
+                console.log("hej")
+                setFavorite(true)
+            } else {
+                console.log("tja")
+                setFavorite(false)
+            }
+        })
     }, [user])
 
     const [favorite, setFavorite] = useState(false)
@@ -39,16 +40,16 @@ const Facility = () => {
 
         if(copy.favorites.length === 0) {
             copy.favorites.push(facility);
-            await db.collection('users').doc(currentUser.uid).update(copy)
+            await db.collection('users').doc(currentUser?.uid).update(copy)
         } else {
             await copy.favorites.forEach(favorite => {
                 if(favorite.id === facility.id) {
                     copy.favorites = user.favorites.filter(item => item.id !== facility.id)
-                    db.collection('users').doc(currentUser.uid).update(copy)
+                    db.collection('users').doc(currentUser?.uid).update(copy)
                     return
                 } else {
                     copy.favorites.push(facility);
-                    db.collection('users').doc(currentUser.uid).update(copy)
+                    db.collection('users').doc(currentUser?.uid).update(copy)
                     return
                 }
             })

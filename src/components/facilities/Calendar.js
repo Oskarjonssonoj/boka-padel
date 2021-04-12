@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { db } from '../../firebase/firebase';
 import { useParams, useHistory } from 'react-router-dom'
 import { useAuth } from '../../contexts/ContextComponent';
@@ -6,6 +6,7 @@ import { AiFillCloseCircle, AiFillCalendar, AiFillClockCircle, AiFillCreditCard 
 import { HiLocationMarker } from "react-icons/hi";
 import { IoMdInformationCircle } from "react-icons/io";
 import { GiTennisCourt } from "react-icons/gi";
+import { ImCross } from "react-icons/im";
 import useFacility from '../../hooks/useFacility'
 import Animate from 'react-smooth'
 import moment from 'moment';
@@ -34,6 +35,12 @@ const Calendar = ({user}) => {
     const { id } = useParams()
     const { facility, loading } = useFacility(id)
     const {currentUser} = useAuth()
+
+    useEffect(() => {
+        if(moment().format('HH:mm') > "17:30") {
+            console.log(moment().format('HH:mm'))
+        }
+    }, [])
 
 
     const handleChoice = (e, index, timeIndex, time) => {
@@ -69,20 +76,22 @@ const Calendar = ({user}) => {
     const handleBooking = async () => {
         let facilityCopy = ({ ...facility });
         let userCopy = ({ ...user });
-        
+
+        console.log(facilityCopy)
+        console.log(userCopy)
 
         try {
             if(userCopy.balance > facilityCopy.appointments[selectedIndexes.court_name_index].times[selectedIndexes.time_index].price) {
 
                 facilityCopy.appointments[selectedIndexes.court_name_index].times[selectedIndexes.time_index].booked = true
-                facilityCopy.appointments[selectedIndexes.court_name_index].times[selectedIndexes.time_index].user_id = currentUser.uid
+                facilityCopy.appointments[selectedIndexes.court_name_index].times[selectedIndexes.time_index].user_id = currentUser?.uid
 
                 userCopy.bookings.push(confirmSelectedTime)
 
                 userCopy.balance = userCopy.balance - facilityCopy.appointments[selectedIndexes.court_name_index].times[selectedIndexes.time_index].price
 
                     await db.collection('facilities').doc(id).update(facilityCopy)
-                    await db.collection('users').doc(currentUser.uid).update(userCopy)
+                    await db.collection('users').doc(currentUser?.uid).update(userCopy)
                 
                 setSelectedTime(false)
     
@@ -140,12 +149,23 @@ const Calendar = ({user}) => {
                                         <td key={index} index={index}>{court.name}</td>
                                         {
                                             court.times.map((time, timeIndex) => {
-                                                return(
-                                                    time.booked ?
-                                                    <td key={timeIndex} index={timeIndex} id={time.user_id === currentUser.uid ? "own-booking" : "booked"} className="booked" onClick={(e) => handleChoice(e, index, timeIndex)}></td>
-                                                    : 
-                                                    <td key={timeIndex} index={timeIndex} className="open" onClick={(e) => handleChoice(e, index, timeIndex, time)}></td>
-                                                )
+                                                if(time.end_time) {
+                                                    if(time.end_time < moment().format('HH:mm')) {
+                                                    
+                                                    return(
+                                                        <td key={timeIndex} index={timeIndex} className={"passed"}>
+                                                            <ImCross />
+                                                        </td>
+                                                    )
+                                                    } else {
+                                                        return(
+                                                        time.booked ?
+                                                        <td key={timeIndex} index={timeIndex} id={time.user_id === currentUser?.uid ? "own-booking" : "booked"} className={"booked"} onClick={(e) => handleChoice(e, index, timeIndex)}></td>
+                                                        : 
+                                                        <td key={timeIndex} index={timeIndex} className={"open"} onClick={(e) => handleChoice(e, index, timeIndex, time)}></td>
+                                                    )
+                                                    }
+                                                }
                                             })
                                         }
                                     </tr>

@@ -127,6 +127,20 @@
                         background: #e75a5a;
                     }
 
+                    .passed {
+                        background: #00000036;
+                        border: #ffffff57 solid 1.5px;
+                        cursor: not-allowed;
+                        text-align: center;
+                        justify-content: center;
+                        align-items: center;
+                        
+                        svg {
+                            margin-top: 0.1rem;
+                            color: #ffffff98;
+                        }
+                    }
+
                     #own-booking {
                         border: #ffffff57 solid 1.5px;
                         background: #e4e42c;
