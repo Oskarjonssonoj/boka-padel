@@ -10,10 +10,13 @@ import { ImCross } from "react-icons/im";
 import useFacility from '../../hooks/useFacility'
 import Animate from 'react-smooth'
 import moment from 'moment';
+import ButtonLoaderSmall from '../../shared/components/loading/ButtonLoaderSmall';
+import useCurrentTime from '../../hooks/useCurrentTime';
 
 const Calendar = ({user}) => {
-
+    
     const [choosedMethod, setChoosedMethod] = useState(true)
+    const [processing, setProcessing] = useState(false)
     const [selectedIndexes, setSelectedIndexes] = useState({
         court_name_index: null,
         time_index: null
@@ -35,12 +38,22 @@ const Calendar = ({user}) => {
     const { id } = useParams()
     const { facility, loading } = useFacility(id)
     const {currentUser} = useAuth()
+    const { timeUpdate } = useCurrentTime()
 
     useEffect(() => {
-        if(moment().format('HH:mm') > "17:30") {
-            console.log(moment().format('HH:mm'))
-        }
-    }, [])
+        let facilityCopy = ({ ...facility });
+
+        facilityCopy = facility?.appointments.forEach(court => {
+            court.times.forEach(time => {
+                if(time.end_time <= timeUpdate && time.booked ) {
+                    time.booked = false
+                    time.user_id = null
+
+                    db.collection('facilities').doc(id).update(facilityCopy)
+                }
+            })
+        })
+    }, [facility, timeUpdate])
 
 
     const handleChoice = (e, index, timeIndex, time) => {
@@ -73,29 +86,33 @@ const Calendar = ({user}) => {
         }
     }
 
-    const handleBooking = async () => {
+    const handleBooking = () => {
+        setProcessing(true)
+
         let facilityCopy = ({ ...facility });
         let userCopy = ({ ...user });
 
-        console.log(facilityCopy)
-        console.log(userCopy)
-
+        
         try {
             if(userCopy.balance > facilityCopy.appointments[selectedIndexes.court_name_index].times[selectedIndexes.time_index].price) {
+                const request = setInterval(() => {
 
-                facilityCopy.appointments[selectedIndexes.court_name_index].times[selectedIndexes.time_index].booked = true
-                facilityCopy.appointments[selectedIndexes.court_name_index].times[selectedIndexes.time_index].user_id = currentUser?.uid
+                    facilityCopy.appointments[selectedIndexes.court_name_index].times[selectedIndexes.time_index].booked = true
+                    facilityCopy.appointments[selectedIndexes.court_name_index].times[selectedIndexes.time_index].user_id = currentUser?.uid
 
-                userCopy.bookings.push(confirmSelectedTime)
+                    userCopy.bookings.push(confirmSelectedTime)
 
-                userCopy.balance = userCopy.balance - facilityCopy.appointments[selectedIndexes.court_name_index].times[selectedIndexes.time_index].price
+                    userCopy.balance = userCopy.balance - facilityCopy.appointments[selectedIndexes.court_name_index].times[selectedIndexes.time_index].price
 
-                    await db.collection('facilities').doc(id).update(facilityCopy)
-                    await db.collection('users').doc(currentUser?.uid).update(userCopy)
-                
-                setSelectedTime(false)
-    
-                history.push('/profile')
+                        db.collection('facilities').doc(id).update(facilityCopy)
+                        db.collection('users').doc(currentUser?.uid).update(userCopy)
+                    
+                    setProcessing(false)
+                    clearInterval(request)
+                    setSelectedTime(false)
+
+                    history.push('/profile')
+                }, 1000)
             } else {
                 return
             }
@@ -103,6 +120,7 @@ const Calendar = ({user}) => {
 
         } catch {
             console.log("Error")
+            setProcessing(false)
         }    
 
     }
@@ -150,7 +168,7 @@ const Calendar = ({user}) => {
                                         {
                                             court.times.map((time, timeIndex) => {
                                                 if(time.end_time) {
-                                                    if(time.end_time < moment().format('HH:mm')) {
+                                                    if(time.end_time <= timeUpdate) {
                                                     
                                                     return(
                                                         <td key={timeIndex} index={timeIndex} className={"passed"}>
@@ -242,7 +260,14 @@ const Calendar = ({user}) => {
                                    </div>
                                 <div className="buttons-section">
                                     <button onClick={handleClose}>Avbryt</button>
-                                    <button disabled={choosedMethod} className="confirm" onClick={handleBooking}>Bekräfta bokning</button>
+                                    <button disabled={choosedMethod} className="confirm" onClick={handleBooking}>
+                                        {
+                                            processing ?
+                                            <ButtonLoaderSmall />
+                                            :
+                                            "Bekräfta bokning"
+                                        }
+                                    </button>
                                 </div> 
                             </div>
                         </Animate>

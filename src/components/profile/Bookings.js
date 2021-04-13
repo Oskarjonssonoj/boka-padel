@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { db } from '../../firebase/firebase';
 import { useAuth } from '../../contexts/ContextComponent';
 import { BiCalendar } from "react-icons/bi";
 import { ImCross } from "react-icons/im";
 import { HiOutlineLocationMarker } from "react-icons/hi";
-import { AiFillCloseCircle, AiFillCalendar, AiFillClockCircle, AiFillCreditCard } from "react-icons/ai";
+import { AiFillCloseCircle, AiFillCalendar, AiFillClockCircle } from "react-icons/ai";
 import { HiLocationMarker } from "react-icons/hi";
 import { GiTennisCourt } from "react-icons/gi";
 import SmallLoader from '../../shared/components/loading/SmallLoader';
@@ -13,6 +13,7 @@ import Animate from 'react-smooth'
 import useFacility from '../../hooks/useFacility'
 import moment from 'moment';
 import ButtonLoaderSmall from '../../shared/components/loading/ButtonLoaderSmall';
+import useCurrentTime from '../../hooks/useCurrentTime';
 
 const Bookings = ({user}) => {
 
@@ -38,6 +39,19 @@ const Bookings = ({user}) => {
 
     const { facility } = useFacility(facilityId)
     const {currentUser} = useAuth()
+    const { timeUpdate } = useCurrentTime()
+    
+    useEffect(() => {
+        let userCopy = ({ ...user });
+
+        user?.bookings?.forEach(booking => {
+            if(booking.information.end_time <= timeUpdate) {
+                userCopy.bookings = user.bookings.filter(item => item.information.time_id !== booking.information.time_id)
+
+                db.collection('users').doc(currentUser?.uid).update(userCopy)
+            }
+        })
+    }, [user, timeUpdate])
 
     const getFacilityBooking = (index, facility_id, booking_id) => {
         setFacilityId(facility_id)

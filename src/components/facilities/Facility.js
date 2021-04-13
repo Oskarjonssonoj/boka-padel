@@ -20,12 +20,9 @@ const Facility = () => {
 
     useEffect(() => {
         user?.favorites?.forEach(favorite => {
-            console.log(favorite)
             if(favorite.id === facility.id) {
-                console.log("hej")
                 setFavorite(true)
             } else {
-                console.log("tja")
                 setFavorite(false)
             }
         })
