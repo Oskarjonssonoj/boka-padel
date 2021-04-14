@@ -1,0 +1,81 @@
+.booking-section {
+    display: flex;
+    color: white;
+    width: 100%;
+
+    .booking-content-section {
+        min-height: 15rem;
+        font-size: 0.8rem;
+        width: 90%;
+        color: white;
+        background-color: #7412b6;
+        border: 1px solid #9758c2;
+        border-radius: 0.25rem;
+        padding-top: 1rem;
+        padding-right: 1rem;
+        padding-left: 0.4rem;
+
+        table {
+            border-spacing: 7px;
+            font-size: 0.7rem;
+            width: 100%;
+
+            th {
+                text-align: center;
+                padding: 0.2rem 0.5rem;
+            }
+
+            th:first-child {
+                text-align: start;
+            }
+
+            td {
+                height: 3.5rem;
+                cursor: pointer;
+                transition: 0.3s;
+                border-radius: 0.25rem;
+                text-align: center;
+                font-size: 1rem;
+            }
+
+            td:first-child {
+                font-size: 0.7rem;
+                font-weight: bold;
+                max-width: 5rem;
+                width: 5rem;
+                padding: 0rem 0.5rem;
+                -moz-binding: url(resource:/xml/ellipsis.xml#ellipsis);
+                -ms-text-overflow: ellipsis;
+                -o-text-overflow: ellipsis;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                border-top: solid white 1px;
+                border-radius: 0 !important;
+                text-align: start;
+            }
+
+            .open{
+                background: #b069f7;
+                border: #ffffff57 solid 1.5px;
+            }
+            
+            .open:hover{
+                background: #a879d8;
+            }
+
+            .passed {
+                background: #00000036;
+                border: #ffffff57 solid 1.5px;
+                cursor: not-allowed;
+                justify-content: center;
+                align-items: center;
+                
+                svg {
+                    font-size: 0.7rem;
+                    color: #ffffff98;
+                }
+            }
+        }
+    }
+}

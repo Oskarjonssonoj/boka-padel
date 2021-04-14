@@ -44,12 +44,23 @@ const Calendar = ({user}) => {
         let facilityCopy = ({ ...facility });
 
         facilityCopy = facility?.appointments.forEach(court => {
-            court.times.forEach(time => {
-                if(time.end_time <= timeUpdate && time.booked ) {
-                    time.booked = false
-                    time.user_id = null
 
-                    db.collection('facilities').doc(id).update(facilityCopy)
+            court.times.forEach(time => {
+
+                if(time.end_time <= timeUpdate && time.booked ) {
+                    facility.time_amount.forEach(each_time => {
+
+                        if(each_time.end_time <= timeUpdate) {
+                            each_time.available_courts = facility.appointments.length
+                            each_time.time_id = []                            
+                            
+                            time.booked = false
+                            time.user_id = null
+
+                            db.collection('facilities').doc(id).update(facilityCopy)
+                        }
+                    })
+
                 }
             })
         })
@@ -97,21 +108,29 @@ const Calendar = ({user}) => {
             if(userCopy.balance > facilityCopy.appointments[selectedIndexes.court_name_index].times[selectedIndexes.time_index].price) {
                 const request = setInterval(() => {
 
-                    facilityCopy.appointments[selectedIndexes.court_name_index].times[selectedIndexes.time_index].booked = true
-                    facilityCopy.appointments[selectedIndexes.court_name_index].times[selectedIndexes.time_index].user_id = currentUser?.uid
+                        facilityCopy.time_amount.forEach(time => {
+                            if(facilityCopy.appointments[selectedIndexes.court_name_index].times[selectedIndexes.time_index].end_time === time.end_time) {
+                                time.available_courts = time.available_courts - 1
+                                time.time_id.push(facilityCopy.appointments[selectedIndexes.court_name_index].times[selectedIndexes.time_index].time_id)
+                            }
+                        })
 
-                    userCopy.bookings.push(confirmSelectedTime)
-
-                    userCopy.balance = userCopy.balance - facilityCopy.appointments[selectedIndexes.court_name_index].times[selectedIndexes.time_index].price
-
-                        db.collection('facilities').doc(id).update(facilityCopy)
-                        db.collection('users').doc(currentUser?.uid).update(userCopy)
+                        facilityCopy.appointments[selectedIndexes.court_name_index].times[selectedIndexes.time_index].booked = true
+                        facilityCopy.appointments[selectedIndexes.court_name_index].times[selectedIndexes.time_index].user_id = currentUser?.uid
+                        
+                        userCopy.bookings.push(confirmSelectedTime)
+                        
+                        userCopy.balance = userCopy.balance - facilityCopy.appointments[selectedIndexes.court_name_index].times[selectedIndexes.time_index].price
+                        
+                            db.collection('facilities').doc(id).update(facilityCopy)
+                            db.collection('users').doc(currentUser?.uid).update(userCopy)
+                        
+                        setProcessing(false)
+                        clearInterval(request)
+                        setSelectedTime(false)
+    
+                        history.push('/profile')
                     
-                    setProcessing(false)
-                    clearInterval(request)
-                    setSelectedTime(false)
-
-                    history.push('/profile')
                 }, 1000)
             } else {
                 return

@@ -51,6 +51,7 @@ const Bookings = ({user}) => {
                 db.collection('users').doc(currentUser?.uid).update(userCopy)
             }
         })
+
     }, [user, timeUpdate])
 
     const getFacilityBooking = (index, facility_id, booking_id) => {
@@ -107,20 +108,28 @@ const Bookings = ({user}) => {
             
                             appointment.times.forEach(time => {
                                 if(booking.information.time_id === time.time_id) {
-                                    clearInterval(request)
                                     
-                                    time.booked = false
-                                    time.user_id = null
-                                    userCopy.bookings = user.bookings.filter(item => item.information.time_id !== time.time_id)
-                                    userCopy.balance = userCopy.balance + time.price
+                                    facility.time_amount.forEach(each_time => {
+                                        if(each_time.end_time === time.end_time) {
+                                            
+                                            clearInterval(request)
 
-                                        db.collection('facilities').doc(facilityId).update(facilityCopy)
-                                        db.collection('users').doc(currentUser?.uid).update(userCopy)
+                                            each_time.available_courts = each_time.available_courts + 1
+                                            each_time.time_id = each_time.time_id.filter(id => id !== time.time_id)
+                                    
+                                            time.booked = false
+                                            time.user_id = null
+                                            userCopy.bookings = user.bookings.filter(item => item.information.time_id !== time.time_id)
+                                            userCopy.balance = userCopy.balance + time.price
 
-                                        setConfirm(true)
-                                        setProcessing(false)
-                                        setCancelBooking(false)
-                                    }
+                                                db.collection('facilities').doc(facilityId).update(facilityCopy)
+                                                db.collection('users').doc(currentUser?.uid).update(userCopy)
+
+                                                setConfirm(true)
+                                                setProcessing(false)
+                                                setCancelBooking(false)
+                                        }
+                                    })}
                                 })
                             }
                         }
