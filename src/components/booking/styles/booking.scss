@@ -65,8 +65,9 @@
             }
 
             #no-times {
-                background-color: red;
-                cursor: not-allowed;
+                background: none;
+                cursor: initial;
+                border: none;
             }
 
             .passed {
