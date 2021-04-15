@@ -6,7 +6,6 @@ import useFacilities from '../../hooks/useFacilities';
 import Page from '../../shared/pages/Page';
 import { ImCross } from "react-icons/im";
 import './styles/booking.scss'
-import moment from 'moment';
 
 const Booking = () => {
 
@@ -27,8 +26,12 @@ const Booking = () => {
     //     })
     // }, [facilities, timeUpdate])
 
-    const goToFacility = (id) => {
-        history.push(`/facilities/${id}`)
+    const goToFacility = (id, e) => {
+        if(e.target.id === "no-times") {
+            return
+        } else {
+            history.push(`/facilities/${id}`)
+        }
     }
 
 
@@ -74,8 +77,11 @@ const Booking = () => {
                                                             )
                                                         } else {
                                                             return (
-                                                                <td className="open" onClick={() => goToFacility(facility.id, index)}>
+                                                                <td className="open" onClick={(e) => goToFacility(facility.id, e)} id={time.available_courts === 0 && "no-times"}>
                                                                     {
+                                                                        time.available_courts === 0 ?
+                                                                        ""
+                                                                        :
                                                                         time.available_courts   
                                                                     }
                                                                 </td>

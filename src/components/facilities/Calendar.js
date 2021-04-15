@@ -49,38 +49,37 @@ const Calendar = ({user}) => {
 
             court.times.forEach(time => {
 
-                if(time.date) {
-                    if(time.date < currentDay) {
+            if(time.date < currentDay) {
 
-                        facility.time_amount.forEach(each_time => {       
-                            if(each_time.date && each_time.date < currentDay) {
+                facility.time_amount.forEach(each_time => {       
+                    if(each_time.date && each_time.date < currentDay) {
 
-                                each_time.available_courts = facility.appointments.length
-                                each_time.time_id = []   
-                                each_time.date = null   
+                        each_time.available_courts = facility.appointments.length
+                        each_time.time_id = []   
+                        each_time.date = null   
 
-                                time.date = null
-                                time.booked = false
-                                time.user_id = null
-        
-                                db.collection('facilities').doc(id).update(facilityCopy)
-                            }
-                        })    
+                        time.date = null
+                        time.booked = false
+                        time.user_id = null
+
+                        db.collection('facilities').doc(id).update(facilityCopy)
                     }
-                } else if(time.end_time <= timeUpdate && time.booked ) {
-                    facility.time_amount.forEach(each_time => {
+                })
+            } else if(time.booked && time.end_time <= timeUpdate) {
+                facility.time_amount.forEach(each_time => {
 
-                        if(each_time.end_time <= timeUpdate) {
-                            each_time.available_courts = facility.appointments.length
-                            each_time.time_id = []                            
-                            
-                            time.booked = false
-                            time.user_id = null
+                    if(each_time.end_time <= timeUpdate) {
+                        each_time.available_courts = facility.appointments.length
+                        each_time.time_id = []
+                        each_time.date = null                            
+                        
+                        time.booked = false
+                        time.user_id = null
+                        time.date = null
 
-                            db.collection('facilities').doc(id).update(facilityCopy)
-                        }
-                    })
-                }
+                        db.collection('facilities').doc(id).update(facilityCopy)
+                    }
+                })}
             })
         })
     }, [facility, timeUpdate, currentDay])

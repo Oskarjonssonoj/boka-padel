@@ -64,6 +64,11 @@
                 background: #a879d8;
             }
 
+            #no-times {
+                background-color: red;
+                cursor: not-allowed;
+            }
+
             .passed {
                 background: #00000036;
                 border: #ffffff57 solid 1.5px;
