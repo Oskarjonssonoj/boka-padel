@@ -180,7 +180,7 @@ const Sidebar = () => {
                                                             <li id={timeIndex}>
                                                                 <div className="facility-info-box">
                                                                     <p>{facility.name} - {facility.city}</p>
-                                                                    <p><span>Bana:</span> {court.name}</p>
+                                                                    <p><span>Bana: </span>{court.name}</p>
                                                                     <p className="time"><AiFillClockCircle/> {time.time}</p>
                                                                 </div>
                                                                 <button onClick={(e) => handleChoice(e, facilityIndex, courtIndex, timeIndex, time)}>Boka</button>
