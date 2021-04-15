@@ -4,6 +4,8 @@ import { useAuth } from '../../../contexts/ContextComponent'
 import Page from '../../../shared/pages/Page'
 import './styles/login.scss'
 import { AiFillCloseCircle } from "react-icons/ai";
+import Register from '../register/Register'
+import ButtonLoaderSmall from '../../../shared/components/loading/ButtonLoaderSmall'
 
 const Login = ({setRegister, setLogin, close}) => {
 
@@ -32,6 +34,7 @@ const Login = ({setRegister, setLogin, close}) => {
         try {
             setLoading(true)    
             await login(email, password)
+            close()
             navigate.push('/profile')
         } catch (e) {
             setError("Email or password are invalid")
@@ -49,32 +52,45 @@ const Login = ({setRegister, setLogin, close}) => {
                         <AiFillCloseCircle onClick={close}/>
                     </div>
                     
-                    <p className="error-msg">{error}</p>
-                    <div className="input-fields">
-                        <input 
-                                type="text" 
-                                autoFo  cus 
-                                required 
-                                value={email} 
-                                onChange={(e) => setEmail(e.target.value)} 
-                                placeholder="Epost..."
-                            /> 
-                            
+                    <div className="body">
+                        <p className="error-msg">{error}</p>
+                        <div className="input-fields">
+                            <label>Epost</label>
                             <input 
-                                type="password" 
-                                required 
-                                value={password} 
-                                onChange={(e) => setPassword(e.target.value)} 
-                                placeholder="Lösenord..."
-                            /> 
-                    </div>
-                    
-                    <div className="btn-container">
-                        <div className="btns">
-                            <button disabled={loading} id="sign-in">Logga in</button>
-                            <button disabled={loading} onClick={toggleRegister}>Registera dig</button>
+                                    type="text" 
+                                    autoFo  cus 
+                                    required 
+                                    value={email} 
+                                    onChange={(e) => setEmail(e.target.value)} 
+                                    placeholder="Epost..."
+                                /> 
+
+                                <label>Lösenord</label>
+                                <input 
+                                    type="password" 
+                                    required 
+                                    value={password} 
+                                    onChange={(e) => setPassword(e.target.value)} 
+                                    placeholder="Lösenord..."
+                                /> 
                         </div>
-                        <p>Har du glömt bort ditt lösenord? Klicka <Link to="/reset-password">här</Link></p>
+                    
+                        <div className="btn-container" id="login-btn-container">
+                            <div className="btns" id="login-btns">
+                                <div>
+                                    <button disabled={loading} id="sign-in">
+                                        {
+                                            loading ?
+                                            <ButtonLoaderSmall />
+                                            :
+                                            "Logga in"
+                                        }
+                                    </button>
+                                    <button disabled={loading} onClick={toggleRegister}>Registera dig</button>
+                                </div>
+                                <p>Har du glömt bort ditt lösenord? Klicka <span onClick={toggleRegister}>här</span></p>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>

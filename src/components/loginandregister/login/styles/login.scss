@@ -1,64 +1,29 @@
 .login {
-    display: flex;
 
     form {
         color: white;
         display: flex;
         flex-direction: column;
-        width: 50%;
+        width: 100%;
 
-        h1 {
-            margin-bottom: 1rem;
-        }
+        .body {
 
-        .input-fields {
-            display: flex;
-            flex-direction: column;
-            width: 70%;
-            
-            input {
-            background-color: white;
-            outline: none;
-            border: none;
-            height: 2rem;
-            border-radius: 0.25rem;
-            padding: 0 1rem;
-            margin-bottom: 1rem;
-            font-size: 0.8rem;
-            }
-        }
-
-        .btn-container {
-            display: flex;
-            flex-direction: column;
-  
-            .btns {
-              margin-bottom: 2rem;
+          .input-fields {
               display: flex;
+              flex-direction: column;
+              width: 70%;
               
-  
-              button {
-                height: 2rem;
-                width: 7rem;
-                border: 1px solid lightgray;
-                border-radius: 0.5rem;
-                background-color: #d1ce2c;
-                color: white;
-                font-weight: bold;
-                outline: none;
-                cursor: pointer;
-                margin-right: 2rem;
-              }
-
-            }
-
-            p, a {    
+              input {
+              background-color: rgb(255, 255, 255);
+              outline: none;
+              border: none;
+              height: 2rem;
+              border-radius: 0.25rem;
+              padding: 0 1rem;
+              margin-bottom: 1rem;
               font-size: 0.8rem;
             }
-
-            a {
-                color: #d1ce2c;
-            }
+          }
         }
     }
 }

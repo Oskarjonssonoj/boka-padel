@@ -1,5 +1,4 @@
 .login {
-    display: flex;
 
     form {
         color: white;
@@ -25,40 +24,6 @@
             padding: 0 1rem;
             margin-bottom: 1rem;
             font-size: 0.8rem;
-            }
-        }
-
-        .btn-container {
-            display: flex;
-            flex-direction: column;
-  
-            .btns {
-              margin-bottom: 2rem;
-              display: flex;
-              
-  
-              button {
-                height: 2rem;
-                width: 7rem;
-                border: 1px solid lightgray;
-                border-radius: 0.5rem;
-                background-color: #d1ce2c;
-                color: white;
-                font-weight: bold;
-                outline: none;
-                cursor: pointer;
-                margin-right: 2rem;
-              }
-
-            }
-
-            p, span {    
-              font-size: 0.8rem;
-            }
-
-            span {
-                color: #d1ce2c;
-                cursor: pointer;
             }
         }
     }

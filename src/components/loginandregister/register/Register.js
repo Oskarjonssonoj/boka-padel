@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom'
 import { useAuth } from '../../../contexts/ContextComponent'
 import Page from '../../../shared/pages/Page'
 import { AiFillCloseCircle } from "react-icons/ai";
+import ButtonLoaderSmall from '../../../shared/components/loading/ButtonLoaderSmall'
 
 const Register = ({setRegister, setLogin, close}) => {
 
@@ -39,6 +40,7 @@ const Register = ({setRegister, setLogin, close}) => {
     try {
         setLoading(true)
         await signup(email, password, firstName, lastName)
+        close()
         history.push('/profile')  
     } catch (e) {
         setError(e.message)
@@ -52,60 +54,76 @@ const Register = ({setRegister, setLogin, close}) => {
           <div className="login"> 
               <form onSubmit={handleSubmit}>
                 <div className="header">
-                    <h5>Logga in</h5>
+                    <h5>Registrera</h5>
                     <AiFillCloseCircle onClick={close}/>
                 </div>
                   
-                <p className="error-msg">{error}</p>
-                    <div className="input-fields">
-                        <input 
-                            type="text" 
-                            autoFo  cus 
-                            required 
-                            value={email} 
-                            onChange={(e) => setEmail(e.target.value)} 
-                            placeholder="Epost..."
-                        />
+                <div className="body">
+                    <p className="error-msg">{error}</p>
+                        <div className="input-fields">
+                            <label>Epost</label>
+                            <input 
+                                type="text" 
+                                autoFo  cus 
+                                required 
+                                value={email} 
+                                onChange={(e) => setEmail(e.target.value)} 
+                                placeholder="Epost..."
+                            />
 
-                        <input 
-                            type="text" 
-                            required 
-                            value={firstName} 
-                            onChange={(e) => setFirstName(e.target.value)} 
-                            placeholder="Förnamn..."
-                        />
+                            <label>Förnamn</label>
+                            <input 
+                                type="text" 
+                                required 
+                                value={firstName} 
+                                onChange={(e) => setFirstName(e.target.value)} 
+                                placeholder="Förnamn..."
+                            />
 
-                        <input 
-                            type="text" 
-                            required 
-                            value={lastName} 
-                            onChange={(e) => setLastName(e.target.value)} 
-                            placeholder="Efternamn..."
-                        />
-                         
-                        <input 
-                            type="password" 
-                            required 
-                            value={password} 
-                            onChange={(e) => setPassword(e.target.value)} 
-                            placeholder="Lösenord..."
-                        /> 
+                            <label>Efternamn</label>
+                            <input 
+                                type="text" 
+                                required 
+                                value={lastName} 
+                                onChange={(e) => setLastName(e.target.value)} 
+                                placeholder="Efternamn..."
+                            />
+                            
+                            <label>Lösenord</label>
+                            <input 
+                                type="password" 
+                                required 
+                                value={password} 
+                                onChange={(e) => setPassword(e.target.value)} 
+                                placeholder="Lösenord..."
+                            /> 
 
-                        <input 
-                            type="password" 
-                            required 
-                            value={confirmPassword} 
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            placeholder="Bekräfta lösenord..." 
-                        /> 
+                            <label>Bekräfta Lösenord</label>
+                            <input 
+                                type="password" 
+                                required 
+                                value={confirmPassword} 
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                placeholder="Bekräfta lösenord..." 
+                            /> 
+                        </div>
+                    
+                        <div className="btn-container">
+                        <div className="btns">
+                            <p>Har du redan ett konto? Klicka <span onClick={toggleLogin}>här</span></p>
+                            <button disabled={loading} id="sign-in">
+                                {
+                                    loading ?
+                                    <ButtonLoaderSmall />
+
+                                    :
+
+                                    "Registrera"
+                                }
+                            </button>
+                        </div>
                     </div>
-                  
-                    <div className="btn-container">
-                      <div className="btns">
-                          <button disabled={loading} id="sign-in">Registrera</button>
-                      </div>
-                      <p>Har du redan ett konto? Klicka <span onClick={toggleLogin}>här</span></p>
-                  </div>
+                </div>  
               </form>
           </div>
       </Page>
