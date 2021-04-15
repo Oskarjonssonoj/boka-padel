@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import './styles/register.scss'
 import { Link, useHistory } from 'react-router-dom'
-import { useAuth } from '../../contexts/ContextComponent'
-import Page from '../../shared/pages/Page'
+import { useAuth } from '../../../contexts/ContextComponent'
+import Page from '../../../shared/pages/Page'
 
 const Register = () => {
   // States

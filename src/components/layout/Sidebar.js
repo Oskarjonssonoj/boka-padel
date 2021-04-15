@@ -19,8 +19,9 @@ import moment from 'moment';
 import ButtonLoaderSmall from '../../shared/components/loading/ButtonLoaderSmall';
 import useUser from '../../hooks/useUser';
 import { db } from '../../firebase/firebase';
+import SmallLoader from '../../shared/components/loading/SmallLoader';
 
-const Sidebar = () => {
+const Sidebar = ({setLoginAndRegister}) => {
 
     const [choosedMethod, setChoosedMethod] = useState(true)
     const [processing, setProcessing] = useState(false)
@@ -45,8 +46,8 @@ const Sidebar = () => {
     const history = useHistory()
 
     const { currentUser, logout } = useAuth()
-    const {user} = useUser(currentUser.uid)
-    const { facilities } = useFacilities()
+    const {user} = useUser(currentUser?.uid)
+    const { facilities, loading } = useFacilities()
     const { liveTime, day, date } = useLiveTime()
     const { currentDay } = useCurrentDay()
     const { timeUpdate } = useCurrentTime()
@@ -169,6 +170,12 @@ const Sidebar = () => {
                     <div className="open-bookings-container" id="your_div">
                         <ul>
                             {
+                                loading ?
+
+                                <SmallLoader />
+
+                                :
+
                                 facilities &&
                                 facilities.map((facility, facilityIndex) => {
                                     return(
@@ -177,14 +184,16 @@ const Sidebar = () => {
                                                 court.times.map((time, timeIndex) => {
                                                     if(!time.booked && time.end_time > timeUpdate) {
                                                         return (
-                                                            <li id={timeIndex}>
-                                                                <div className="facility-info-box">
-                                                                    <p>{facility.name} - {facility.city}</p>
-                                                                    <p><span>Bana: </span>{court.name}</p>
-                                                                    <p className="time"><AiFillClockCircle/> {time.time}</p>
-                                                                </div>
-                                                                <button onClick={(e) => handleChoice(e, facilityIndex, courtIndex, timeIndex, time)}>Boka</button>
-                                                            </li>
+                                                            <Animate to="1" from="0" attributeName="opacity" duration="1000">
+                                                                <li id={timeIndex}>
+                                                                    <div className="facility-info-box">
+                                                                        <p>{facility.name} - {facility.city}</p>
+                                                                        <p><span>Bana: </span>{court.name}</p>
+                                                                        <p className="time"><AiFillClockCircle/> {time.time}</p>
+                                                                    </div>
+                                                                    <button onClick={(e) => handleChoice(e, facilityIndex, courtIndex, timeIndex, time)}>Boka</button>
+                                                                </li>
+                                                            </Animate>
                                                         )
                                                     }
                                                 })
@@ -296,7 +305,7 @@ const Sidebar = () => {
                     :
 
                     <div className="sidebar-login">
-                        <Link to="/login">Logga in</Link>
+                        <p onClick={() => setLoginAndRegister(true)}>Logga in</p>
                         <AiOutlineLogin />
                     </div>
                 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {Route} from 'react-router-dom'
 import Header from '../components/layout/Header';
 import Booking from '../components/booking/Booking';
@@ -7,17 +7,19 @@ import Sidebar from '../components/layout/Sidebar';
 import TopBorder from '../components/layout/TopBorder';
 import Facilities from '../components/facilities/Facilities';
 import Facility from '../components/facilities/Facility';
-import Login from '../components/login/Login';
 import Profile from '../components/profile/Profile';
-import Register from '../components/register/Register';
 import EditProfile from '../components/profile/EditProfile';
+import LoginAndRegister from '../components/loginandregister/LoginAndRegister';
 
 const HomePage = () => {
+
+    const [loginAndRegister, setLoginAndRegister] = useState(false)
+
     return (
         <>
             <TopBorder />
-            <Header />
-            <Sidebar />
+            <Header setLoginAndRegister={setLoginAndRegister}/>
+            <Sidebar setLoginAndRegister={setLoginAndRegister}/>
 
             <div className="content-section">
                 <div className="component-content-section">
@@ -33,21 +35,18 @@ const HomePage = () => {
                         <Facility />
                     </Route>
 
-                    <Route exact path="/login">
-                        <Login />
-                    </Route>
-
-                    <Route exact path="/register">
-                        <Register />
-                    </Route>
-
                     <Route exact path="/profile">
                         <Profile />
                     </Route>                    
 
                     <Route path="/profile/edit">
                         <EditProfile />
-                    </Route>                    
+                    </Route>
+
+                    {
+                        loginAndRegister &&
+                        <LoginAndRegister />                    
+                    }
                 </div>
             </div>        
         </>

@@ -44,6 +44,13 @@
                 color: white;
             }
         }
+
+        li {
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
         .active {
             font-weight: bold;
             transition: 0.2s;
