@@ -52,12 +52,13 @@
 
             }
 
-            p, a {    
+            p, span {    
               font-size: 0.8rem;
             }
 
-            a {
+            span {
                 color: #d1ce2c;
+                cursor: pointer;
             }
         }
     }

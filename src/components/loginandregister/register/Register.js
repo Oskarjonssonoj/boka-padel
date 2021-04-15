@@ -3,8 +3,10 @@ import './styles/register.scss'
 import { Link, useHistory } from 'react-router-dom'
 import { useAuth } from '../../../contexts/ContextComponent'
 import Page from '../../../shared/pages/Page'
+import { AiFillCloseCircle } from "react-icons/ai";
 
-const Register = () => {
+const Register = ({setRegister, setLogin, close}) => {
+
   // States
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -19,6 +21,10 @@ const Register = () => {
   const { signup } = useAuth()
 
   // GENERAL FUNCTIONS
+  const toggleLogin = () => {
+    setLogin(true)
+    setRegister(false)
+}
 
   // Handle the submitting of login
   const handleSubmit = async (e) => {
@@ -45,10 +51,13 @@ const Register = () => {
       <Page title="Registrera">
           <div className="login"> 
               <form onSubmit={handleSubmit}>
-                  <h1>Registrera</h1>
+                <div className="header">
+                    <h5>Logga in</h5>
+                    <AiFillCloseCircle onClick={close}/>
+                </div>
                   
-                  <p className="error-msg">{error}</p>
-                  <div className="input-fields">
+                <p className="error-msg">{error}</p>
+                    <div className="input-fields">
                         <input 
                             type="text" 
                             autoFo  cus 
@@ -89,13 +98,13 @@ const Register = () => {
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             placeholder="Bekräfta lösenord..." 
                         /> 
-                  </div>
+                    </div>
                   
-                  <div className="btn-container">
+                    <div className="btn-container">
                       <div className="btns">
                           <button disabled={loading} id="sign-in">Registrera</button>
                       </div>
-                      <p>Har du redan ett konto? Klicka <Link to="/login">här</Link></p>
+                      <p>Har du redan ett konto? Klicka <span onClick={toggleLogin}>här</span></p>
                   </div>
               </form>
           </div>

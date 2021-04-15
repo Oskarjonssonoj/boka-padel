@@ -3,8 +3,9 @@ import { Link, useHistory } from 'react-router-dom'
 import { useAuth } from '../../../contexts/ContextComponent'
 import Page from '../../../shared/pages/Page'
 import './styles/login.scss'
+import { AiFillCloseCircle } from "react-icons/ai";
 
-const Login = (props) => {
+const Login = ({setRegister, setLogin, close}) => {
 
     // States
     const [error, setError] = useState(null)
@@ -17,6 +18,10 @@ const Login = (props) => {
     const { login } = useAuth()
 
     // GENERAL FUNCTIONS
+    const toggleRegister = () => {
+        setLogin(false)
+        setRegister(true)
+    }
 
     // Handle the submitting of login
     const handleSubmit = async (e) => {
@@ -39,7 +44,10 @@ const Login = (props) => {
         <Page title="Logga in">
             <div className="login"> 
                 <form onSubmit={handleSubmit}>
-                    <h1>Logga in</h1>
+                    <div className="header">
+                        <h5>Logga in</h5>
+                        <AiFillCloseCircle onClick={close}/>
+                    </div>
                     
                     <p className="error-msg">{error}</p>
                     <div className="input-fields">
@@ -64,7 +72,7 @@ const Login = (props) => {
                     <div className="btn-container">
                         <div className="btns">
                             <button disabled={loading} id="sign-in">Logga in</button>
-                            <Link to="/register"><button disabled={loading}>Registera dig</button></Link>
+                            <button disabled={loading} onClick={toggleRegister}>Registera dig</button>
                         </div>
                         <p>Har du glömt bort ditt lösenord? Klicka <Link to="/reset-password">här</Link></p>
                     </div>

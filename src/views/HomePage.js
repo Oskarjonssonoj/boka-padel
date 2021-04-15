@@ -43,12 +43,12 @@ const HomePage = () => {
                         <EditProfile />
                     </Route>
 
-                    {
-                        loginAndRegister &&
-                        <LoginAndRegister />                    
-                    }
                 </div>
             </div>        
+            {
+                loginAndRegister &&
+                <LoginAndRegister setLoginAndRegister={setLoginAndRegister}/>                    
+            }
         </>
     )
 }

@@ -1,0 +1,23 @@
+.login-and-register-popup {
+        font-size: 0.8rem;
+        color: white;
+        position: fixed;
+        left: 0;
+        z-index: 14;
+        top: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: #000000a4;
+        display: flex;
+        justify-content: center;
+
+        .login-and-register-window {
+            margin-top: 8rem;
+            width: 30rem;
+            height: 35rem;
+            border-radius: 0.3rem;
+            background: #a65df0;
+            border: solid #ffffffa4 1px;
+            position: relative;
+        }
+}
