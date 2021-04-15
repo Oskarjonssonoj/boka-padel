@@ -6,6 +6,7 @@ import useFacilities from '../../hooks/useFacilities';
 import Page from '../../shared/pages/Page';
 import { ImCross } from "react-icons/im";
 import './styles/booking.scss'
+import moment from 'moment';
 
 const Booking = () => {
 
@@ -13,18 +14,18 @@ const Booking = () => {
     const { facilities } = useFacilities()
     const { timeUpdate } = useCurrentTime()
 
-    useEffect(() => {
-        let facilitiesCopy = ([ ...facilities ]);
+    // useEffect(() => {
+    //     let facilitiesCopy = ([ ...facilities ]);
 
-        facilitiesCopy = facilities?.forEach(facility => {
-            facility.time_amount?.forEach(time => {
-                if(time.end_time <= timeUpdate) {
-                    time.available_courts = facility.appointments.length
-                    time.time_id = []
-                }
-            })
-        })
-    }, [facilities, timeUpdate])
+    //     facilitiesCopy = facilities?.forEach(facility => {
+    //         facility.time_amount?.forEach(time => {
+    //             if(time.end_time <= timeUpdate) {
+    //                 time.available_courts = facility.appointments.length
+    //                 time.time_id = []
+    //             }
+    //         })
+    //     })
+    // }, [facilities, timeUpdate])
 
     const goToFacility = (id) => {
         history.push(`/facilities/${id}`)

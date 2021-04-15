@@ -115,8 +115,10 @@ const Bookings = ({user}) => {
                                             clearInterval(request)
 
                                             each_time.available_courts = each_time.available_courts + 1
+                                            each_time.date= null
                                             each_time.time_id = each_time.time_id.filter(id => id !== time.time_id)
                                     
+                                            time.date = null
                                             time.booked = false
                                             time.user_id = null
                                             userCopy.bookings = user.bookings.filter(item => item.information.time_id !== time.time_id)

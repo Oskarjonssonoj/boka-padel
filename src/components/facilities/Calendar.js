@@ -12,6 +12,7 @@ import Animate from 'react-smooth'
 import moment from 'moment';
 import ButtonLoaderSmall from '../../shared/components/loading/ButtonLoaderSmall';
 import useCurrentTime from '../../hooks/useCurrentTime';
+import useCurrentDay from '../../hooks/useCurrentDay';
 
 const Calendar = ({user}) => {
     
@@ -36,18 +37,37 @@ const Calendar = ({user}) => {
 
     const history = useHistory()
     const { id } = useParams()
-    const { facility, loading } = useFacility(id)
+    const { facility } = useFacility(id)
     const {currentUser} = useAuth()
     const { timeUpdate } = useCurrentTime()
+    const { currentDay } = useCurrentDay()
 
     useEffect(() => {
         let facilityCopy = ({ ...facility });
-
+        
         facilityCopy = facility?.appointments.forEach(court => {
 
             court.times.forEach(time => {
 
-                if(time.end_time <= timeUpdate && time.booked ) {
+                if(time.date) {
+                    if(time.date < currentDay) {
+
+                        facility.time_amount.forEach(each_time => {       
+                            if(each_time.date && each_time.date < currentDay) {
+
+                                each_time.available_courts = facility.appointments.length
+                                each_time.time_id = []   
+                                each_time.date = null   
+
+                                time.date = null
+                                time.booked = false
+                                time.user_id = null
+        
+                                db.collection('facilities').doc(id).update(facilityCopy)
+                            }
+                        })    
+                    }
+                } else if(time.end_time <= timeUpdate && time.booked ) {
                     facility.time_amount.forEach(each_time => {
 
                         if(each_time.end_time <= timeUpdate) {
@@ -60,11 +80,10 @@ const Calendar = ({user}) => {
                             db.collection('facilities').doc(id).update(facilityCopy)
                         }
                     })
-
                 }
             })
         })
-    }, [facility, timeUpdate])
+    }, [facility, timeUpdate, currentDay])
 
 
     const handleChoice = (e, index, timeIndex, time) => {
@@ -97,7 +116,7 @@ const Calendar = ({user}) => {
         }
     }
 
-    const handleBooking = () => {
+    const handleBooking = async () => {
         setProcessing(true)
 
         let facilityCopy = ({ ...facility });
@@ -112,18 +131,22 @@ const Calendar = ({user}) => {
                             if(facilityCopy.appointments[selectedIndexes.court_name_index].times[selectedIndexes.time_index].end_time === time.end_time) {
                                 time.available_courts = time.available_courts - 1
                                 time.time_id.push(facilityCopy.appointments[selectedIndexes.court_name_index].times[selectedIndexes.time_index].time_id)
+                                time.date = currentDay
                             }
                         })
 
                         facilityCopy.appointments[selectedIndexes.court_name_index].times[selectedIndexes.time_index].booked = true
+                        facilityCopy.appointments[selectedIndexes.court_name_index].times[selectedIndexes.time_index].date = currentDay
                         facilityCopy.appointments[selectedIndexes.court_name_index].times[selectedIndexes.time_index].user_id = currentUser?.uid
+
                         
                         userCopy.bookings.push(confirmSelectedTime)
                         
                         userCopy.balance = userCopy.balance - facilityCopy.appointments[selectedIndexes.court_name_index].times[selectedIndexes.time_index].price
                         
-                            db.collection('facilities').doc(id).update(facilityCopy)
-                            db.collection('users').doc(currentUser?.uid).update(userCopy)
+
+                        db.collection('facilities').doc(id).update(facilityCopy)
+                        db.collection('users').doc(currentUser?.uid).update(userCopy)
                         
                         setProcessing(false)
                         clearInterval(request)
