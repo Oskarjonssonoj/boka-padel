@@ -6,6 +6,7 @@ import useFacilities from '../../hooks/useFacilities';
 import Page from '../../shared/pages/Page';
 import { ImCross } from "react-icons/im";
 import './styles/booking.scss'
+import Animate from 'react-smooth'
 
 const Booking = () => {
 
@@ -39,6 +40,7 @@ const Booking = () => {
         <Page title="Sök Tider">
             <div className="booking-section">
                 <div className="booking-content-section">
+                    <Animate to="1" from="0" attributeName="opacity" duration="1000">
                     <table className="all-facilities-section">
                         <thead>
                             <tr>
@@ -96,6 +98,7 @@ const Booking = () => {
                             }
                         </tbody>
                     </table>
+                    </Animate>
                 </div>
             </div>
         </Page>
