@@ -56,6 +56,10 @@ const Sidebar = ({setLoginAndRegister}) => {
         history.push("/")
     }
 
+    const profile = () => {
+        history.push("/profile")
+    }
+
     const handleLogout = async () => {
         logout()
         history.push('/')
@@ -295,7 +299,7 @@ const Sidebar = ({setLoginAndRegister}) => {
                 {
                     currentUser ? 
                     <>
-                        <div>
+                        <div onClick={profile}>
                             <Gravatar default="mp" email={currentUser?.email} className="avatar"/>
                         </div>
                         <div>

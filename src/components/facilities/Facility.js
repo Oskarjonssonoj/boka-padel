@@ -26,7 +26,7 @@ const Facility = () => {
                 setFavorite(false)
             }
         })
-    }, [user])
+    }, [user, facility])
 
     const [favorite, setFavorite] = useState(false)
 

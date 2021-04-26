@@ -13,6 +13,7 @@ import Page from '../../shared/pages/Page'
 const EditProfile = () => {
     const [updatedUser, setUpdatedUser] = useState()
     const [processing, setProcessing] = useState(false)
+    const [userHover, setUserHover] = useState({})
 
     const {currentUser} = useAuth()
     const {user} = useUser(currentUser.uid)
@@ -46,6 +47,10 @@ const EditProfile = () => {
 		}
 	}
 
+    const hoverInformation = (key, condition) => {
+        setUserHover(prevState => ({...prevState, [key]: condition}))
+    }
+
     return (
         <Page title="Redigera Profil">
             <div className="edit-profile-section">
@@ -61,9 +66,19 @@ const EditProfile = () => {
                 <div className="mandatory-section">
                     <div className="left-field">
                         <div className="input-fields">
-                            <div>
+                            <div className="input-heading">
                                 <label>Förnamn</label>
-                                <AiOutlineGlobal />
+                                <AiOutlineGlobal 
+                                    onMouseEnter={() => hoverInformation("first_name", true)} 
+                                    onMouseLeave={() => hoverInformation("first_name", false)}
+                                />
+                                {
+                                    userHover.first_name &&
+                                    <div className="hover-info" id="first_name">
+                                        <p>Offentlig</p>
+                                        <div className="arrow"/>
+                                    </div>
+                                }
                             </div>
                             <input 
                                 type="text" 
@@ -75,9 +90,19 @@ const EditProfile = () => {
                             />
                         </div>
                         <div className="input-fields">
-                            <div>
+                            <div className="input-heading">
                                 <label>Efternamn</label>
-                                <HiLockClosed />
+                                <HiLockClosed 
+                                    onMouseEnter={() => hoverInformation("last_name", true)} 
+                                    onMouseLeave={() => hoverInformation("last_name", false)}
+                                />
+                                {
+                                    userHover.last_name &&
+                                    <div className="hover-info" id="last_name">
+                                        <p>Visas bara för mig</p>
+                                        <div className="arrow"/>
+                                    </div>
+                                }
                             </div>
                             <input 
                                 type="text" 
@@ -91,9 +116,19 @@ const EditProfile = () => {
                     </div>
                     <div className="right-field">
                         <div className="input-fields">
-                            <div>
+                            <div className="input-heading">
                                 <label>E-post</label>
-                                <HiLockClosed />
+                                <HiLockClosed 
+                                    onMouseEnter={() => hoverInformation("email", true)} 
+                                    onMouseLeave={() => hoverInformation("email", false)}
+                                />
+                                {
+                                    userHover.email &&
+                                    <div className="hover-info" id="email">
+                                        <p>Visas bara för mig</p>
+                                        <div className="arrow"/>
+                                    </div>
+                                }
                             </div>
                             <input 
                                 type="text" 
@@ -114,9 +149,19 @@ const EditProfile = () => {
                 <div className="optionally-section">
                     <div className="left-field">
                         <div className="input-fields">
-                            <div>
+                            <div className="input-heading">
                                 <label>Telefonnummer</label>
-                                <HiLockClosed />
+                                <HiLockClosed 
+                                onMouseEnter={() => hoverInformation("phone", true)} 
+                                onMouseLeave={() => hoverInformation("phone", false)}
+                                />
+                                {
+                                    userHover.phone &&
+                                    <div className="hover-info" id="phone">
+                                        <p>Visas bara för mig</p>
+                                        <div className="arrow"/>
+                                    </div>
+                                }
                             </div>
                             <input 
                                 type="text" 
@@ -127,9 +172,19 @@ const EditProfile = () => {
                             />
                         </div>
                         <div className="input-fields">
-                            <div>
+                            <div className="input-heading">
                                 <label>Adress</label>
-                                <HiLockClosed />
+                                <HiLockClosed 
+                                onMouseEnter={() => hoverInformation("address", true)} 
+                                onMouseLeave={() => hoverInformation("address", false)}
+                                />
+                                {
+                                    userHover.address &&
+                                    <div className="hover-info" id="address">
+                                        <p>Visas bara för mig</p>
+                                        <div className="arrow"/>
+                                    </div>
+                                }
                             </div>
                             <input 
                                 type="text" 
@@ -140,9 +195,19 @@ const EditProfile = () => {
                             />
                         </div>
                         <div className="input-fields">
-                            <div>
+                            <div className="input-heading">
                                 <label>Postkod</label>
-                                <HiLockClosed />
+                                <HiLockClosed 
+                                onMouseEnter={() => hoverInformation("postal_code", true)} 
+                                onMouseLeave={() => hoverInformation("postal_code", false)}
+                                />
+                                {
+                                    userHover.postal_code &&
+                                    <div className="hover-info" id="postal_code">
+                                        <p>Visas bara för mig</p>
+                                        <div className="arrow"/>
+                                    </div>
+                                }
                             </div>
                             <input 
                                 type="text" 
@@ -153,9 +218,19 @@ const EditProfile = () => {
                             />
                         </div>
                         <div className="input-fields">
-                            <div>
+                            <div className="input-heading">
                                 <label>Födelsedag</label>
-                                <HiLockClosed />
+                                <HiLockClosed 
+                                onMouseEnter={() => hoverInformation("birtday", true)} 
+                                onMouseLeave={() => hoverInformation("birtday", false)}
+                                />
+                                {
+                                    userHover.birtday &&
+                                    <div className="hover-info" id="birthday">
+                                        <p>Visas bara för mig</p>
+                                        <div className="arrow"/>
+                                    </div>
+                                }
                             </div>
                             <input 
                                 type="date" 
@@ -166,9 +241,19 @@ const EditProfile = () => {
                             />
                         </div>
                         <div className="input-fields">
-                            <div>
+                            <div className="input-heading">
                                 <label>Nationalitet</label>
-                                <HiLockClosed />
+                                <HiLockClosed 
+                                onMouseEnter={() => hoverInformation("nationality", true)} 
+                                onMouseLeave={() => hoverInformation("nationality", false)}
+                                />
+                                {
+                                    userHover.nationality &&
+                                    <div className="hover-info" id="nationality">
+                                        <p>Visas bara för mig</p>
+                                        <div className="arrow"/>
+                                    </div>
+                                }
                             </div>
                             <select 
                                 type="date" 
@@ -186,9 +271,19 @@ const EditProfile = () => {
                     </div>
                     <div className="right-field">
                         <div className="input-fields">
-                            <div>
+                            <div className="input-heading">
                                 <label>Kön</label>
-                                <HiLockClosed />
+                                <HiLockClosed 
+                                onMouseEnter={() => hoverInformation("gender", true)} 
+                                onMouseLeave={() => hoverInformation("gender", false)}
+                                />
+                                {
+                                    userHover.gender &&
+                                    <div className="hover-info" id="gender">
+                                        <p>Visas bara för mig</p>
+                                        <div className="arrow"/>
+                                    </div>
+                                }
                             </div>
                             <select 
                                 type="date" 
@@ -203,9 +298,19 @@ const EditProfile = () => {
                             </select>
                         </div>
                         <div className="input-fields">
-                            <div>
+                            <div className="input-heading">
                                 <label>Län</label>
-                                <AiOutlineGlobal />
+                                <AiOutlineGlobal 
+                                onMouseEnter={() => hoverInformation("county", true)} 
+                                onMouseLeave={() => hoverInformation("county", false)}
+                                />
+                                {
+                                    userHover.county &&
+                                    <div className="hover-info" id="county">
+                                        <p>Offentlig</p>
+                                        <div className="arrow"/>
+                                    </div>
+                                }
                             </div>
                             <select 
                                 type="date" 
@@ -221,9 +326,19 @@ const EditProfile = () => {
                             </select>
                         </div>
                         <div className="input-fields">
-                            <div>
+                            <div className="input-heading">
                                 <label>Språk</label>
-                                <HiLockClosed />
+                                <HiLockClosed 
+                                onMouseEnter={() => hoverInformation("language", true)} 
+                                onMouseLeave={() => hoverInformation("language", false)}
+                                />
+                                {
+                                    userHover.language &&
+                                    <div className="hover-info" id="language">
+                                        <p>Visas bara för mig</p>
+                                        <div className="arrow"/>
+                                    </div>
+                                }
                             </div>
                             <select 
                                 type="date" 

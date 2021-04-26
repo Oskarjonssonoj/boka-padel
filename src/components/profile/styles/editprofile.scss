@@ -51,7 +51,7 @@
 
         }::placeholder {
             color: #ffffff93;             
-          }
+        }
         
         .left-field, .right-field {
             width: 48%;
@@ -60,10 +60,86 @@
                 display: flex;
                 flex-direction: column;
                 
-                div {
+                .input-heading {
                     display: flex;
-                    margin-bottom: 0.4rem;
+                    margin-bottom: 0.6rem;
                     align-items: center;
+                    position: relative;
+
+                    svg {
+                        cursor: pointer;
+                    }
+
+                    .hover-info {
+                        position: absolute;
+                        left: 6rem;
+                        background-color: #8750be;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        animation: fadeIn 0.5s;
+                        
+
+                        @keyframes fadeIn {
+                            0% {opacity:0;}
+                            100% {opacity:1;}
+                        }
+
+
+                        p {
+                            font-size: 0.7rem;
+                            padding: 0 1.2rem;
+                            position: relative;
+                            height: 1.3rem;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                        }
+
+                        .arrow {
+                            position: absolute;
+                            height: 0.8rem;
+                            width: 0.8rem;
+                            background-color: #8750be;
+                            z-index: 1000;
+                            left: -0.3rem;                           
+                            transform: rotate(45deg);
+                        }
+                    }
+
+                    #first_name {
+                        left: 5.4rem;
+                    }
+                    #last_name {
+                        left: 5.8rem;
+                    }
+                    #email {
+                        left: 5rem;
+                    }
+                    #phone {
+                        left: 7.8rem;
+                    }
+                    #address {
+                        left: 5rem;
+                    }
+                    #postal_code {
+                        left: 5.4rem;
+                    }
+                    #birthday {
+                        left: 6.5rem;
+                    }
+                    #nationality {
+                        left: 6.3rem;
+                    }
+                    #gender {
+                        left: 4rem;
+                    }
+                    #county {
+                        left: 4rem;
+                    }
+                    #language {
+                        left: 4.7rem;
+                    }
                 }
             }
 
