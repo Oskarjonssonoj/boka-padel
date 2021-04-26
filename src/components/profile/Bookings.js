@@ -14,6 +14,7 @@ import useFacility from '../../hooks/useFacility'
 import moment from 'moment';
 import ButtonLoaderSmall from '../../shared/components/loading/ButtonLoaderSmall';
 import useCurrentTime from '../../hooks/useCurrentTime';
+import useCurrentDay from '../../hooks/useCurrentDay';
 
 const Bookings = ({user}) => {
 
@@ -40,12 +41,15 @@ const Bookings = ({user}) => {
     const { facility } = useFacility(facilityId)
     const {currentUser} = useAuth()
     const { timeUpdate } = useCurrentTime()
+    const { currentDay } = useCurrentDay()
+    
     
     useEffect(() => {
         let userCopy = ({ ...user });
 
         user?.bookings?.forEach(booking => {
-            if(booking.information.end_time <= timeUpdate) {
+            console.log(booking)
+            if(booking.information.date < currentDay || booking.information.end_time <= timeUpdate) {
                 userCopy.bookings = user.bookings.filter(item => item.information.time_id !== booking.information.time_id)
 
                 db.collection('users').doc(currentUser?.uid).update(userCopy)
