@@ -184,9 +184,9 @@ const Sidebar = ({setLoginAndRegister}) => {
                                 :
 
                                 facilities &&
-                                facilities.map((facility, facilityIndex) => {
+                                facilities?.map((facility, facilityIndex) => {
                                     return(
-                                        facility.appointments.map((court, courtIndex) => {                                            
+                                        facility?.appointments?.map((court, courtIndex) => {                                            
                                             return (
                                                 court.times.map((time, timeIndex) => {
                                                     if(!time.booked && time.end_time > timeUpdate) {        

@@ -50,6 +50,21 @@ const GoogleMaps = ({name}) => {
                 </div>
             </div>
 
+            : name && name === "Padelcourt no.9" ?
+            <div className="mapouter">
+                <div className="gmap_canvas">
+                    <iframe 
+                        title="MPC" 
+                        className="gmap_iframe" width="100%" 
+                        frameborder="0" 
+                        scrolling="no" 
+                        marginheight="0" 
+                        marginwidth="0" 
+                        src="https://maps.google.com/maps?q=Padel%20Court%20no&t=k&z=13&ie=UTF8&iwloc=&output=embed">
+                    </iframe>
+                </div>
+            </div>
+
             : ""
         }
         </>

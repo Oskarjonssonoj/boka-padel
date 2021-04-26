@@ -19,19 +19,14 @@ const Facility = () => {
     const {user} = useUser(currentUser?.uid)
 
     useEffect(() => {
-        user?.favorites?.forEach(favorite => {
-            if(favorite.id === facility?.id) {
-                setFavorite(true)
-            } else {
-                setFavorite(false)
-            }
-        })
+        setFavorite(user?.favorites?.some(e => e.id === facility?.id))
     }, [user, facility])
 
     const [favorite, setFavorite] = useState(false)
 
     const handleFavorite = async (e) =>{
         let copy = ({ ...user });
+        console.log("tja", copy)
 
         setFavorite(!favorite)
 
@@ -39,17 +34,15 @@ const Facility = () => {
             copy.favorites.push(facility);
             await db.collection('users').doc(currentUser?.uid).update(copy)
         } else {
-            await copy.favorites.forEach(favorite => {
-                if(favorite?.id === facility.id) {
-                    copy.favorites = user.favorites.filter(item => item.id !== facility.id)
-                    db.collection('users').doc(currentUser?.uid).update(copy)
-                    return
-                } else {
-                    copy.favorites.push(facility);
-                    db.collection('users').doc(currentUser?.uid).update(copy)
-                    return
-                }
-            })
+            if (copy.favorites.some(e => e.id === facility.id)) {
+                copy.favorites = user.favorites.filter(item => item.id !== facility.id)
+                db.collection('users').doc(currentUser?.uid).update(copy)
+                return
+            } else {
+                copy.favorites.push(facility);
+                db.collection('users').doc(currentUser?.uid).update(copy)
+                return
+            }
         }
 	}
 
@@ -65,11 +58,14 @@ const Facility = () => {
                     <Page title={facility?.name}>
                         <div className="single-facility-section">
                                 <div className="facility-heading">
+                                    <img alt="facility-logo" src={facility.logo}/>
                                     <div className="name-and-favorite">
-                                        <h1>{facility.name}</h1>
+                                        <div>
+                                            <h1>{facility.name}</h1>
+                                            <h3>{facility.location}</h3>
+                                        </div>
                                         <AiOutlineHeart className={favorite ? "favorite" : ""} onClick={handleFavorite}/>
                                     </div>
-                                    <h3>{facility.location}</h3>
                                 </div>
                                 <div className="single-content-section">
                                     <div>
