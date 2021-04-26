@@ -198,6 +198,102 @@
             }
         }
     }
+    .upcoming-bookings-section {
+        margin-top: 2rem;
+        margin-left: 2rem;
+
+        .time-heading {
+            color: white;
+            display: flex;
+            align-items: center;
+
+            svg {
+                font-size: 1.2rem;
+                margin-right: 0.5rem;
+            }
+        }
+
+        .upcoming-bookings-container {
+            width: 15rem;
+            height: 10rem;
+            overflow-y: scroll;
+            background-color: #360568;
+            margin-top: 0.7rem;
+            border: #6221a2 solid 2px;
+            border-radius: 0.25rem;
+
+            ul {
+                list-style: none;
+                color: white;
+                margin: 0.5rem;
+                position: relative;
+
+                .no-bookings {
+                    font-size: 0.7rem;
+                }
+
+                li {
+                    height: 4rem;
+                    width: 99%;
+                    background-color: #6d30ab;
+                    margin-bottom: 0.7rem;
+                    border: #924ada solid 1px;
+                    border-radius: 0.25rem;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    .facility-info-box {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: flex-start;
+                        align-items: flex-start;
+                        height: 100%;
+                        margin-left: 0.3rem;
+                        
+                        p {
+                            font-size: 0.6rem;
+                            display: flex;
+                            align-items: center;
+
+                            svg {
+                                margin-right: 0.3rem;
+                            }
+
+                            span {
+                                font-weight: bold;
+                                margin-right: 0.3rem;
+                            }
+                        }
+
+                        .time {
+                            margin-top: 0.2rem;
+                        }
+
+                        p:first-child {
+                            font-weight: bold;
+                            margin-bottom: 0.9rem;
+                            margin-top: 0.3rem;
+                        }
+                    }
+
+                    img {
+                        margin: 0 0.4rem;
+                        width: 2.8rem;
+                        height: 2.8rem;
+                        border-radius: 0.25rem;
+                        border: solid white 2px;
+                        color: white;
+                        background-color: none;
+                        font-size: 0.7rem;
+                        outline: none;
+                        cursor: pointer;
+                        transition: 0.3s;
+                    }
+                }
+            }
+        }
+    }
 
     .confirm-booking {
         font-size: 0.8rem;

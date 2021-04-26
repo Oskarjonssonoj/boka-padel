@@ -11,6 +11,7 @@ import useLiveTime from '../../hooks/useLiveTime';
 import useCurrentDay from '../../hooks/useCurrentDay';
 import useCurrentTime from '../../hooks/useCurrentTime';
 import { AiFillCloseCircle, AiFillCalendar, AiFillClockCircle, AiFillCreditCard } from "react-icons/ai";
+import { BiCalendar } from "react-icons/bi";
 import { HiLocationMarker } from "react-icons/hi";
 import { IoMdInformationCircle } from "react-icons/io";
 import { GiTennisCourt } from "react-icons/gi";
@@ -46,7 +47,7 @@ const Sidebar = ({setLoginAndRegister}) => {
     const history = useHistory()
 
     const { currentUser, logout } = useAuth()
-    const {user} = useUser(currentUser?.uid)
+    const { user, userLoading } = useUser(currentUser?.uid)
     const { facilities, loading } = useFacilities()
     const { liveTime, day, date } = useLiveTime()
     const { currentDay } = useCurrentDay()
@@ -211,6 +212,51 @@ const Sidebar = ({setLoginAndRegister}) => {
                         </ul>
                     </div>
                 </div>
+
+                {
+                    currentUser &&
+                    <div className="upcoming-bookings-section">
+                        <div className="time-heading">
+                            <BiCalendar />
+                            <h4>Kommande tider</h4>
+                        </div>
+                        <Animate to="1" from="0" attributeName="opacity" duration="1000">
+                        <div className="upcoming-bookings-container">
+                            <ul>
+                                {
+                                    userLoading ?
+
+                                    <SmallLoader />
+
+                                    :
+
+                                    user?.bookings?.length < 1 ?
+                                    <Animate to="1" from="0" attributeName="opacity" duration="1000">
+                                        <p className="no-bookings">Du har för tillfället inga bokningar</p>
+                                    </Animate> 
+
+                                    : 
+                                    
+                                    user?.bookings?.map(booking => {
+                                        return (
+                                            <Animate to="1" from="0" attributeName="opacity" duration="500">
+                                                <li>
+                                                    <div className="facility-info-box">
+                                                        <p>{booking.facility} - {booking.city}</p>
+                                                        <p><span>Bana: </span>{booking.court}</p>
+                                                        <p className="time"><AiFillClockCircle/> {booking.information.time}</p>
+                                                    </div>
+                                                    <img alt="facility-img" src={booking.logo}/>
+                                                </li>
+                                            </Animate>
+                                        )
+                                    })
+                                }
+                            </ul>
+                        </div>
+                        </Animate>
+                    </div>
+                }
             </div>
 
             {

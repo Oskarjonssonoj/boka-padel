@@ -6,14 +6,14 @@ const useUser = (userId) => {
 
 	// States
 	const [user, setUser] = useState()
-	const [loading, setLoading] = useState(true)
+	const [userLoading, setUserLoading] = useState(true)
 
     // Contexts
 	const { currentUser } = useAuth()
 
 	// Effects
 	useEffect(() => {
-		setLoading(true)
+		setUserLoading(true)
 
 		const unmount = db.collection('users').doc(userId).onSnapshot(doc => {
 			setUser({
@@ -22,12 +22,12 @@ const useUser = (userId) => {
 			})
 		})
 
-		setLoading(false)
+		setUserLoading(false)
 		return unmount
 
 	}, [userId])
 
-	return { user, loading }
+	return { user, userLoading }
 }
 
 export default useUser
