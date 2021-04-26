@@ -20,7 +20,7 @@ const Facility = () => {
 
     useEffect(() => {
         user?.favorites?.forEach(favorite => {
-            if(favorite.id === facility.id) {
+            if(favorite.id === facility?.id) {
                 setFavorite(true)
             } else {
                 setFavorite(false)
@@ -40,7 +40,7 @@ const Facility = () => {
             await db.collection('users').doc(currentUser?.uid).update(copy)
         } else {
             await copy.favorites.forEach(favorite => {
-                if(favorite.id === facility.id) {
+                if(favorite?.id === facility.id) {
                     copy.favorites = user.favorites.filter(item => item.id !== facility.id)
                     db.collection('users').doc(currentUser?.uid).update(copy)
                     return
