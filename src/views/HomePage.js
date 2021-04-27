@@ -32,7 +32,7 @@ const HomePage = () => {
                     </Route>
                     
                     <Route path="/facilities/:id">
-                        <Facility />
+                        <Facility setLoginAndRegister={setLoginAndRegister}/>
                     </Route>
 
                     <Route exact path="/profile">

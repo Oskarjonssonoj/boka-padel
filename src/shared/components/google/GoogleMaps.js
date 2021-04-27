@@ -50,7 +50,7 @@ const GoogleMaps = ({name}) => {
                 </div>
             </div>
 
-            : name && name === "Padelcourt no.9" ?
+            : name && name === "Padel Court no.9" ?
             <div className="mapouter">
                 <div className="gmap_canvas">
                     <iframe 

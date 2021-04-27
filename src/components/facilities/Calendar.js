@@ -14,7 +14,7 @@ import ButtonLoaderSmall from '../../shared/components/loading/ButtonLoaderSmall
 import useCurrentTime from '../../hooks/useCurrentTime';
 import useCurrentDay from '../../hooks/useCurrentDay';
 
-const Calendar = ({user}) => {
+const Calendar = ({user, setLoginAndRegister}) => {
     
     const [choosedMethod, setChoosedMethod] = useState(true)
     const [processing, setProcessing] = useState(false)
@@ -38,7 +38,7 @@ const Calendar = ({user}) => {
     const history = useHistory()
     const { id } = useParams()
     const { facility } = useFacility(id)
-    const {currentUser} = useAuth()
+    const { currentUser } = useAuth()
     const { timeUpdate } = useCurrentTime()
     const { currentDay } = useCurrentDay()
 
@@ -85,10 +85,10 @@ const Calendar = ({user}) => {
     }, [facility, timeUpdate, currentDay])
 
 
-    const handleChoice = (e, index, timeIndex, time) => {
+    const handleChoice = (index, timeIndex, time) => {
 
-        if(e.target.id === "booked" || e.target.id === "own-booking") {
-            return
+        if(!currentUser) {
+            setLoginAndRegister(true)
         } else {
             let copy = ({ ...facility });
     
@@ -219,9 +219,9 @@ const Calendar = ({user}) => {
                                                     } else {
                                                         return(
                                                         time.booked ?
-                                                        <td key={timeIndex} index={timeIndex} id={time.user_id === currentUser?.uid ? "own-booking" : "booked"} className={"booked"} onClick={(e) => handleChoice(e, index, timeIndex)}></td>
+                                                        <td key={timeIndex} index={timeIndex} id={time.user_id === currentUser?.uid ? "own-booking" : "booked"} className={"booked"}></td>
                                                         : 
-                                                        <td key={timeIndex} index={timeIndex} className={"open"} onClick={(e) => handleChoice(e, index, timeIndex, time)}></td>
+                                                        <td key={timeIndex} index={timeIndex} className={"open"} onClick={(e) => handleChoice(index, timeIndex, time)}></td>
                                                     )
                                                     }
                                                 }

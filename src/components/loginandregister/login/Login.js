@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
 import { useAuth } from '../../../contexts/ContextComponent'
 import Page from '../../../shared/pages/Page'
 import './styles/login.scss'
 import { AiFillCloseCircle } from "react-icons/ai";
-import Register from '../register/Register'
 import ButtonLoaderSmall from '../../../shared/components/loading/ButtonLoaderSmall'
 
 const Login = ({setRegister, setLogin, close}) => {
@@ -16,7 +14,6 @@ const Login = ({setRegister, setLogin, close}) => {
     const [password, setPassword] = useState("")
 
     // Hooks
-    const navigate = useHistory()
     const { login } = useAuth()
 
     // GENERAL FUNCTIONS
@@ -35,7 +32,6 @@ const Login = ({setRegister, setLogin, close}) => {
             setLoading(true)    
             await login(email, password)
             close()
-            navigate.push('/profile')
         } catch (e) {
             setError("Email or password are invalid")
             setLoading(false)

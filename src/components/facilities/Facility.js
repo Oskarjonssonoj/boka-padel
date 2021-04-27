@@ -12,7 +12,7 @@ import { useAuth } from '../../contexts/ContextComponent';
 import { AiOutlineHeart } from "react-icons/ai";
 import Calendar from './Calendar'
 
-const Facility = () => {
+const Facility = ({setLoginAndRegister}) => {
     const { id } = useParams()
     const { facility, loading } = useFacility(id)
     const {currentUser} = useAuth()
@@ -64,7 +64,10 @@ const Facility = () => {
                                             <h1>{facility.name}</h1>
                                             <h3>{facility.location}</h3>
                                         </div>
-                                        <AiOutlineHeart className={favorite ? "favorite" : ""} onClick={handleFavorite}/>
+                                        {
+                                            currentUser &&
+                                            <AiOutlineHeart className={favorite ? "favorite" : ""} onClick={handleFavorite}/>
+                                        }
                                     </div>
                                 </div>
                                 <div className="single-content-section">
@@ -76,7 +79,7 @@ const Facility = () => {
                                     </div>
                                     
                                     <div className="facility-calendar">
-                                        <Calendar calendar={facility?.appointments} user={user}/>
+                                        <Calendar calendar={facility?.appointments} user={user} setLoginAndRegister={setLoginAndRegister}/>
                                     </div>
                                 </div>
                             </div>
