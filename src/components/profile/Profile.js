@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './styles/profile.scss'
 import {Link} from 'react-router-dom'
 import Gravatar from "react-gravatar";
@@ -11,8 +11,12 @@ import ProfileInfo from './ProfileInfo';
 import Bookings from './Bookings';
 import Page from '../../shared/pages/Page'
 import FavoriteFacilities from './FavoriteFacilities';
+import CardInformation from './CardInformation'
+import 'react-credit-cards/es/styles-compiled.css'
 
 const Profile = () => {
+
+    const [payment, setPaymnet] = useState(false)
 
     const {currentUser} = useAuth()
     const {user} = useUser(currentUser.uid)
@@ -23,7 +27,7 @@ const Profile = () => {
                 <div className="profile-header">
                     <Gravatar default="mp" email={user?.email} className="avatar-big" size={200}/>
                     <div className="name-and-currency">
-                        <p>{user?.balance} SEK</p>
+                        <p onClick={() => setPaymnet(true)}>{user?.balance} SEK</p>
                         <h3>{user?.first_name} {user?.last_name}</h3>
                     </div>
                     <div className="edit-user">
@@ -63,6 +67,11 @@ const Profile = () => {
                         <Bookings user={user}/>
                     </div>
                 </div>
+
+                {
+                    payment &&
+                    <CardInformation setPaymnet={setPaymnet}/>
+                }
 
             </div>
         </Page>
