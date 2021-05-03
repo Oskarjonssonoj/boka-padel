@@ -64,7 +64,7 @@ const Register = ({setRegister, setLogin, close}) => {
                             <label>Epost</label>
                             <input 
                                 type="text" 
-                                autoFo  cus 
+                                autoFocus 
                                 required 
                                 value={email} 
                                 onChange={(e) => setEmail(e.target.value)} 
