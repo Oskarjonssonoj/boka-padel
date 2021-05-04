@@ -198,7 +198,14 @@ const Sidebar = ({setLoginAndRegister}) => {
                                                                         <p><span>Bana: </span>{court.name}</p>
                                                                         <p className="time"><AiFillClockCircle/> {time.time}</p>
                                                                     </div>
-                                                                    <button onClick={(e) => handleChoice(e, facilityIndex, courtIndex, timeIndex, time)}>Boka</button>
+                                                                    <button 
+                                                                        onClick={
+                                                                            currentUser ?
+                                                                            (e) => handleChoice(e, facilityIndex, courtIndex, timeIndex, time)
+                                                                            : 
+                                                                            () => setLoginAndRegister(true)
+                                                                        }
+                                                                    >Boka</button>
                                                                 </li>
                                                             </Animate>
                                                         )
