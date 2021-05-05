@@ -180,3 +180,36 @@
         }
     }
 }
+
+@media screen and (max-width: 768px) {
+    .edit-profile-section {
+        margin-left: 0;
+    
+        .mandatory-header, .optionally-header {
+            margin-right: 0;
+        }
+
+        .mandatory-header {
+            margin-top: 3rem;
+        }
+    
+        .mandatory-section, .optionally-section {
+            margin-right: 0;
+            flex-wrap: wrap;
+            
+            .left-field, .right-field {
+                width: 100%;
+
+                .submit-buttons {
+                    justify-content: space-between;
+                    margin-bottom: 4rem;
+    
+                    button {
+                        width: 45%;
+                        margin-left: 0;
+                    }
+                }
+            }
+        }
+    }
+}

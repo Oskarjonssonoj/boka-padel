@@ -397,6 +397,24 @@
                         }
 
                     }
+
+                    @media screen and (max-width: 500px) {
+                        .cancel-booking-window {
+                            margin-top: 2rem !important;
+                            height: 90vh !important;
+                
+                            .header {
+                
+                                h5 {
+                                    width: 60%;
+                                }
+                
+                                svg {
+                                    font-size: 1.3rem;
+                                }
+                            }
+                        }
+                    }
                 }
 
                 .no-bookings {
@@ -489,6 +507,153 @@
                     #rest {
                         width: 15%;
                     }
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 1300px) {
+        .profile-header {
+            width: calc(100% - 3.5rem);
+            margin-left: 3.5rem;
+    
+            .edit-user {
+                margin-right: 2rem;
+            }
+        }
+        
+        .user-information {
+            margin-left: 0.5rem;
+    
+            .right-section {
+                margin-right: 2rem;
+                margin-left: 2rem;
+            }
+        }
+    }
+
+    @media screen and (max-width: 1175px) {
+        .profile-header {
+            width: calc(100% - 2.5rem);
+    
+            .edit-user {
+                margin-right: 1.1rem;
+            }
+        }
+        
+        .user-information {
+            margin-left: 0.5rem;
+    
+            .right-section {
+                margin-right: 0rem;
+                margin-left: 2rem;
+            }
+        }
+    }
+
+    @media screen and (max-width: 900px) {
+        
+        .user-information {
+            flex-wrap: wrap;
+
+            .left-section {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+
+                .favorite-facilities {
+                    width: 48%;
+                    min-height: 12rem;
+                }
+        
+                .user-info-section {
+                    width: 48%;
+                    margin-top: 0 !important;         
+                }
+            }
+    
+            .right-section {
+                margin-top: 2rem;
+                margin-right: 0rem;
+                margin-left: 0rem;
+            }
+        }
+    }
+    
+    @media screen and (max-width: 600px) {
+
+        .profile-header {
+            
+            .avatar-big {
+                left: -3.8rem;
+    
+            }
+    
+            .name-and-currency {
+                flex-direction: column-reverse;
+                align-items: flex-start;
+                margin-left: 4.2rem;
+
+    
+                h3 {
+                    font-size: 1.1rem;
+                    margin-bottom: 0.5rem;
+                }
+            }
+            
+            .edit-user {
+    
+                a {
+                    padding: 0.5rem;
+
+                    p {
+                        display: none;
+                    }
+                    
+                    svg {
+                        font-size: 1rem;
+                        margin-right: 0rem;
+                        margin-left: 0.2rem;
+                    }
+                }
+    
+                a:hover {
+                    color: #9abfc9;
+                    border: lightblue solid 1px;
+                }
+            }
+        }
+        
+        .user-information {
+            flex-wrap: wrap;
+            margin-left: 0;
+
+            .left-section {
+                flex-wrap: wrap;
+
+                .favorite-facilities {
+                    width: 100%;
+                    min-height: 12rem;
+                }
+        
+                .user-info-section {
+                    width: 100%;
+                    margin-top: 2rem !important;         
+                }
+            }
+    
+            .right-section {
+                margin-top: 2rem;
+                margin-right: 0rem;
+                margin-left: 0rem;
+                margin-bottom: 4rem;
+
+                .remove {
+                    margin-right: 0rem !important;
+                }
+
+                th, td {
+                    font-size: 0.65rem ;
                 }
             }
         }

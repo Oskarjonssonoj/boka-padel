@@ -271,4 +271,22 @@
             }
         }
     }
+
+    @media screen and (max-width: 500px) {
+        .payment-window {
+            margin-top: 2rem !important;
+            height: 90vh !important;
+
+            .header {
+
+                h5 {
+                    font-size: 1.3rem;
+                }
+
+                svg {
+                    font-size: 1.3rem;
+                }
+            }
+        }
+    }
 }

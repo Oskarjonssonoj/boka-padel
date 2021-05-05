@@ -336,6 +336,42 @@
                         }
                     }
                 }
+
+                @media screen and (max-width: 500px) {
+                    .confirm-booking-widow {
+                        margin-top: 2rem !important;
+                        height: 90vh !important;
+
+                        .header {
+    
+                            h5 {
+                                font-size: 1.3rem;
+                            }
+    
+                            svg {
+                                font-size: 1.3rem;
+                            }
+                        }
+    
+                        .body {
+    
+                            .first-row, .second-row, .third-row, .fourth-row, .fifth-row {
+    
+                                div {
+    
+                                    svg {
+                                        font-size: 1.2rem;
+                                    }    
+                                    
+                                }
+    
+                                .payment {
+                                    width: 60%;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
