@@ -3,7 +3,7 @@
     width: 100%;
     background: linear-gradient(139deg, #fb8817, #ff4b01, #c12127, #e02aff), ;
     animation: rotate 10s linear infinite;
-    filter: blur(20px)
+    filter: blur(20px);
 }
 
 @keyframes rotate {
@@ -27,6 +27,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    .small-header {
+        display: none;
+    }
 
     ul {
         list-style: none;
@@ -55,6 +59,162 @@
             font-weight: bold;
             transition: 0.2s;
         }
+    }
+}
+
+.slideInMenu {
+    display: none;
+}
+
+@media screen and (max-width: 1175px) {
+    .header-section  {
+        width: calc(100% - 0rem);
+        margin-left: 0;
+        justify-content: space-between;
+
+        .small-header {
+            margin: 0;
+            height: 4rem;
+            display: flex;
+            align-items: center;
+            margin-left: 2rem;
+            font-size: 1rem;
+            color: white;
+            position: relative;
+
+            h1 {
+                z-index: 3;
+                cursor: pointer;
+            }
+
+            img {
+                width: 2.8rem;
+                position: absolute;
+                z-index: 2;
+                right: -1.8rem;
+                top: 0.5rem;
+            }
+        }
+        
+        ul {
+            display: none;
+        }
+
+        .menu-btn {
+            display: inline;
+            position: relative;
+            display: flex;
+            width: 1.5rem;
+            height: 1.5rem;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.5s ease-in-out;
+            margin-right: 2.5rem;
+    
+                .menu-btn_burger {
+                    width: 1.2rem;
+                    height: 0.15rem;
+                    background-color: white;
+                    border-radius: 0.5rem;
+                    transition: all 0.5s ease-in-out;
+                }
+                .menu-btn_burger::before,
+                .menu-btn_burger::after {
+                        content: '';
+                        position: absolute;
+                        width: 1.5rem;
+                        height: 0.15rem;
+                        background-color: white;
+                        border-radius: 0.5rem;
+                        transition: all 0.5s ease-in-out;
+                }
+    
+                .menu-btn_burger::before {
+                    transform: translateY(-0.45rem);
+                }
+                .menu-btn_burger::after {
+                    transform: translateY(0.45rem);
+                }
+        }
+
+        //ANIMATION 
+        #open .menu-btn_burger {
+            background: transparent;
+        }
+        #open .menu-btn_burger::before {
+            transform: rotate(-45deg) 
+        }
+        #open .menu-btn_burger::after {
+            transform: rotate(45deg) 
+        }
+    }
+
+    .slideInMenu {
+        position: fixed;
+        top: 1rem;
+        left: 0;
+        background-color: #210340;
+        height: 100%;
+        width: 100%;
+        z-index: 1;
+        transition: transform 0.2s ease-in-out;
+        transform: translateX(-120%);
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+    
+        ul {
+            display: flex;
+            list-style: none;
+            flex-direction: column;
+            margin-top: 9rem;
+            
+            a {
+                color: white;
+                text-decoration: none;
+            }
+
+            li {
+                position: relative;
+                cursor: pointer;
+                color: white;
+                margin-bottom: 2.5rem;
+                font-size: 1.5rem;
+                text-align: center;
+            }
+
+            div {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: white;
+                font-size: 1.4rem;
+                
+                p {
+                    margin-right: 1rem;
+                }
+
+                svg {
+                    margin-top: 0.2rem;
+                }
+
+                p, svg {
+                    cursor: pointer;
+                }
+            }
+
+            .active {
+                font-weight: bold;
+                transition: 0.2s;
+            }
+        }
+    
+    }
+
+    #activeMenu {
+        transform: translateX(0%);
     }
 }
 
@@ -504,5 +664,11 @@
         .sidebar-login {
             margin-left: 0 !important;
         }
+    }
+}
+
+@media screen and (max-width: 1175px) {
+    .sidebar-section  {
+        display: none;    
     }
 }

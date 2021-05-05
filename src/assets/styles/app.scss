@@ -12,7 +12,18 @@
         .component-content-section {
             margin-top: 4rem;
             margin-left: 1rem;
-            // position: relative;
+        }
+    }
+
+    @media screen and (max-width: 1175px) {
+        .content-section  {
+            width: calc(100% - 0rem);
+            margin-left: 0; 
+            
+            .component-content-section {
+                margin-left: 2rem;
+                margin-right: 2rem;
+            }
         }
     }
 }
