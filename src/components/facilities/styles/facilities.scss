@@ -11,11 +11,25 @@
         margin-bottom: 2rem;
         align-items: center;
         justify-content: space-between;
-        padding: 0 1.5rem;
         cursor: pointer;
         transition: 0.3s !important;
         text-decoration: none;
+
+        p {
+            margin-left: 1.5rem;
+        }
+
+        svg {
+            margin-right: 1.5rem;
+        }
     }
+
+    @media screen and (max-width: 1175px) {
+        .each-facility  {
+            width: 100%;
+        }
+    }
+    
     .each-facility:hover {
         color: white;
         background-color: #8223e0;

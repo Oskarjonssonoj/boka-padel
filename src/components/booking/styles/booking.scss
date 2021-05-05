@@ -84,4 +84,46 @@
             }
         }
     }
+
+    @media screen and (max-width: 1175px) {
+        .booking-content-section  {
+            width: 100%;
+            overflow: scroll;
+        }
+    }
+
+    @media screen and (max-width: 832px) {
+        .booking-content-section  {
+            table {
+                border-spacing: 7px;
+                font-size: 0.7rem;
+                width: 100%;
+                padding-bottom: 2rem;
+    
+                th {
+                    text-align: center;
+                    padding: 0.2rem 0.5rem;
+                }
+    
+                th:first-child {
+                    text-align: start;
+                }
+    
+                td {
+                    height: 2rem;
+                    padding: 0.8rem 2rem;
+                    cursor: pointer;
+                    transition: 0.3s;
+                    border-radius: 0.25rem;
+                }
+
+                td:first-child {
+                    text-align: start;
+                    max-width: 3rem;
+                    width: 3rem;
+                    padding-left: 0;
+                }
+            }
+        }
+    }
 }

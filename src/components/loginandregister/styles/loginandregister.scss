@@ -133,4 +133,11 @@
                 }
             }
         }
+
+        @media screen and (max-width: 476px) {
+            .login-and-register-window {
+                margin-top: 0 !important;
+                height: 100vh !important;
+            }
+        }
 }

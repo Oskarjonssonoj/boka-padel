@@ -339,6 +339,162 @@
             }
         }
     }
+
+    @media screen and (max-width: 1340px) {
+        .single-content-section  {
+            flex-wrap: wrap;
+
+            .facility-info {
+                width: 100%;
+            }
+    
+            .facility-calendar {
+                margin-top: 0;
+                width: 100%;
+                margin-right: 0;
+                margin-left: 0;
+                margin-bottom: 4rem;
+    
+                .facility-calendar-content {
+                    border-top: none;
+                    border-radius: 0rem 0rem 0.25rem 0.25rem;                    
+                    padding-right: 0;
+                    padding-left: 0;
+                    overflow: scroll;
+    
+                    table {
+                        margin-top: 1rem;
+                        padding-left: 0.5rem;
+                        padding-right: 1rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1175px) {
+    .single-facility-section {
+        margin-right: 0;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .single-facility-section {
+
+        .facility-heading {
+            color: white;
+            display: flex;
+            align-items: flex-end;
+            border-bottom: solid white 1.5px;
+            padding-bottom: 1rem;
+        }
+
+        .single-content-section  {
+    
+            .facility-calendar {
+    
+                .facility-calendar-content {
+    
+                    table {
+                        padding-bottom: 2rem;
+    
+                        th {
+                            text-align: center;
+                        }
+    
+                        th:first-child {
+                            text-align: start;
+                        }
+    
+                        td {
+                            height: 2rem;
+                            padding: 0.8rem 2rem;
+                            cursor: pointer;
+                            transition: 0.3s;
+                            border-radius: 0.25rem;
+                        }
+    
+                        td:first-child {
+                            text-align: start;
+                            max-width: 3rem;
+                            width: 3rem;
+                            padding-left: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 500px) {
+    .single-facility-section {
+
+        .facility-heading {
+    
+            img {
+                width: 4rem;
+                height: 4rem;
+                margin-right: 1rem !important;
+            }
+    
+            .name-and-favorite {
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+                
+                h1 {
+                    font-size: 1.3rem;
+                }
+
+                h3 {
+                    font-size: 1rem;
+                }
+
+                svg {
+                    font-size: 1.8rem;
+                    margin-right: 0.3rem;
+                    margin-top: 0 !important;
+                }
+            }
+        }
+
+        .single-content-section  {
+    
+            .facility-calendar {
+    
+                .facility-calendar-content {
+    
+                    table {
+                        padding-bottom: 2rem;
+    
+                        th {
+                            text-align: center;
+                        }
+    
+                        th:first-child {
+                            text-align: start;
+                        }
+    
+                        td {
+                            height: 2rem;
+                            padding: 0.8rem 2rem;
+                            cursor: pointer;
+                            transition: 0.3s;
+                            border-radius: 0.25rem;
+                        }
+    
+                        td:first-child {
+                            text-align: start;
+                            max-width: 3rem;
+                            width: 3rem;
+                            padding-left: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 

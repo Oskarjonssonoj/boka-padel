@@ -67,7 +67,7 @@ const Booking = () => {
                                         <tr>
                                             <td>{facility?.name}</td>
                                             {   
-                                                facility?.time_amount?.map((time, index) => {
+                                                facility?.time_amount?.map((time) => {
                                                     
                                                     if(time.end_time) {
                                                         if(time.end_time <= timeUpdate) {
