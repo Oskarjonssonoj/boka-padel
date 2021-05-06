@@ -42,6 +42,7 @@ const Calendar = ({user, setLoginAndRegister}) => {
     const { timeUpdate } = useCurrentTime()
     const { currentDay } = useCurrentDay()
 
+
     useEffect(() => {
         let facilityCopy = ({ ...facility });
         
