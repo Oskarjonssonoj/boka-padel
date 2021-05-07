@@ -13,6 +13,7 @@ import moment from 'moment';
 import ButtonLoaderSmall from '../../shared/components/loading/ButtonLoaderSmall';
 import useCurrentTime from '../../hooks/useCurrentTime';
 import useCurrentDay from '../../hooks/useCurrentDay';
+import SmallLoader from '../../shared/components/loading/SmallLoader';
 
 const Calendar = ({user, setLoginAndRegister}) => {
     
@@ -181,59 +182,68 @@ const Calendar = ({user, setLoginAndRegister}) => {
 
     return (
         <div className="facility-calendar-content">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Bana</th>
-                        <th>06.00</th>
-                        <th>07.30</th>
-                        <th>09.00</th>
-                        <th>10.30</th>
-                        <th>12.00</th>
-                        <th>13.30</th>
-                        <th>15.00</th>
-                        <th>16.30</th>
-                        <th>18.00</th>
-                        <th>19.30</th>
-                        <th>21.00</th>
-                        <th>22.30</th>
-                    </tr>
-                </thead>
+            {
+                !facility ?
+                <SmallLoader />
 
-                <tbody>
-                        {
-                            facility &&
-                            facility?.appointments?.map((court, index) => {
-                                return (
-                                    <tr>
-                                        <td key={index} index={index}>{court.name}</td>
-                                        {
-                                            court.times.map((time, timeIndex) => {
-                                                if(time.end_time) {
-                                                    if(time.end_time <= timeUpdate) {
-                                                    
-                                                    return(
-                                                        <td key={timeIndex} index={timeIndex} className={"passed"}>
-                                                            <ImCross />
-                                                        </td>
-                                                    )
-                                                    } else {
+                :
+                <Animate to="1" from="0" attributeName="opacity" duration="1000">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Bana</th>
+                                <th>06.00</th>
+                                <th>07.30</th>
+                                <th>09.00</th>
+                                <th>10.30</th>
+                                <th>12.00</th>
+                                <th>13.30</th>
+                                <th>15.00</th>
+                                <th>16.30</th>
+                                <th>18.00</th>
+                                <th>19.30</th>
+                                <th>21.00</th>
+                                <th>22.30</th>
+                            </tr>
+                        </thead>                
+
+                        
+                        <tbody>
+                            {
+                                facility &&
+                                facility?.appointments?.map((court, index) => {
+                                    return (
+                                        <tr>
+                                            <td key={index} index={index}>{court.name}</td>
+                                            {
+                                                court.times.map((time, timeIndex) => {
+                                                    if(time.end_time) {
+                                                        if(time.end_time <= timeUpdate) {
+                                                        
                                                         return(
-                                                        time.booked ?
-                                                        <td key={timeIndex} index={timeIndex} id={time.user_id === currentUser?.uid ? "own-booking" : "booked"} className={"booked"}></td>
-                                                        : 
-                                                        <td key={timeIndex} index={timeIndex} className={"open"} onClick={(e) => handleChoice(index, timeIndex, time)}></td>
-                                                    )
+                                                            <td key={timeIndex} index={timeIndex} className={"passed"}>
+                                                                <ImCross />
+                                                            </td>
+                                                        )
+                                                        } else {
+                                                            return(
+                                                            time.booked ?
+                                                            <td key={timeIndex} index={timeIndex} id={time.user_id === currentUser?.uid ? "own-booking" : "booked"} className={"booked"}></td>
+                                                            : 
+                                                            <td key={timeIndex} index={timeIndex} className={"open"} onClick={(e) => handleChoice(index, timeIndex, time)}></td>
+                                                        )
+                                                        }
                                                     }
-                                                }
-                                            })
-                                        }
-                                    </tr>
-                                )
-                            })
-                        }
-                    </tbody>
-            </table>
+                                                })
+                                            }
+                                        </tr>
+                                    )
+                                })
+                            }
+                        </tbody>
+                    </table>
+                </Animate>
+            }
 
             {
                 selectedTime &&

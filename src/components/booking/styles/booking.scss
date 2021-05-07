@@ -1,7 +1,31 @@
 .booking-section {
     display: flex;
+    flex-direction: column;
     color: white;
     width: 100%;
+
+    .booking-header {
+        display: flex;
+        padding: 0.8rem 0.5rem;
+        align-items: center;
+        background-color: #7412b6;
+        border: 1px solid #9758c2;
+        border-radius: 0.25rem 0.25rem 0rem 0rem;
+        width: 90%;
+        padding-right: 1rem;
+        padding-left: 0.4rem;
+        margin-top: 1rem;
+
+        svg {
+            font-size: 1.6rem;
+            margin-left: 0.6rem;
+        }
+
+        h1 {
+            font-size: 1.3rem;
+            margin-left: 0.7rem;
+        }
+    }
 
     .booking-content-section {
         min-height: 15rem;
@@ -10,7 +34,8 @@
         color: white;
         background-color: #7412b6;
         border: 1px solid #9758c2;
-        border-radius: 0.25rem;
+        border-top: none;
+        border-radius: 0rem 0rem 0.25rem 0.25rem;
         padding-top: 1rem;
         padding-right: 1rem;
         padding-left: 0.4rem;
@@ -86,13 +111,31 @@
     }
 
     @media screen and (max-width: 1175px) {
+
+        .booking-header {
+            width: 100%;
+            padding-right: 0 !important;
+            padding-left: 0;
+
+            svg {
+                margin-left: 0.7rem !important;
+            }
+    
+            h1 {
+                font-size: 1.2rem;
+            }
+        }
+
         .booking-content-section  {
             width: 100%;
             overflow: scroll;
+            padding-right: 0 !important;
+            padding-left: 0;
         }
     }
 
     @media screen and (max-width: 832px) {
+
         .booking-content-section  {
             table {
                 border-spacing: 7px;

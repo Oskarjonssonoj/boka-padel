@@ -1,6 +1,8 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { auth, db } from '../firebase/firebase.js'
 import BounceLoader from '../assets/images/loading-bouncer.gif'
+import Logo from '../assets/images/logo.png'
+import Animate from 'react-smooth'
 
 const AuthContext = createContext()
 
@@ -71,7 +73,15 @@ const AuthContextProvider = (props) => {
         <AuthContext.Provider value={contextValues}>
             {loading && (
                 <div className="ball-bouncing-loader">
-                    <img src={BounceLoader} alt="loading"/>
+                    <Animate to="1" from="0" attributeName="opacity">
+                        <div className="loading-header">
+                            <h1>BokaPadel</h1>
+                            <img src={Logo} alt="logo"/>
+                        </div>
+                    </Animate>
+
+                    <img src={BounceLoader} alt="loading" className="loader"/>
+
                 </div>
                 )
             }
