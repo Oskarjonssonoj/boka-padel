@@ -4,11 +4,17 @@ import { AiOutlineLogin } from "react-icons/ai";
 import Logo from '../../assets/images/logo.png'
 import {NavLink, useHistory} from 'react-router-dom'
 import './styles/layout.scss'
+import useUser from '../../hooks/useUser';
 import { useAuth } from '../../contexts/ContextComponent';
+import { AiFillClockCircle } from "react-icons/ai";
+import { BiCalendar } from "react-icons/bi";
+import Animate from 'react-smooth'
+import SmallLoader from '../../shared/components/loading/SmallLoader';
 
 const Header = ({setLoginAndRegister}) => {
     
     const {currentUser, logout} = useAuth()
+    const { user, userLoading } = useUser(currentUser?.uid)
     const history = useHistory()
 
     const [openClose, setOpenClose] = useState(false)
@@ -63,7 +69,7 @@ const Header = ({setLoginAndRegister}) => {
                     }
 
                     {
-                    currentUser ? 
+                        currentUser ? 
                         <>
                             <div>
                                 <p onClick={handleLogout}>Logga ut</p>
@@ -77,7 +83,7 @@ const Header = ({setLoginAndRegister}) => {
                             <p onClick={() => setLoginAndRegister(true)}>Logga in</p>
                             <AiOutlineLogin />
                         </div>
-                    }   
+                    } 
                 </ul>
             </div>
         </>

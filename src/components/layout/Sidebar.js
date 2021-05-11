@@ -121,9 +121,6 @@ const Sidebar = ({setLoginAndRegister}) => {
                         
                         userCopy.balance = userCopy.balance - facilitiesCopy.appointments[selectedIndexes.court_name_index].times[selectedIndexes.time_index].price
                         
-
-                        console.log(facilitiesCopy)
-                        console.log(userCopy)
                         db.collection('facilities').doc(facilitiesCopy.id).update(facilitiesCopy)
                         db.collection('users').doc(currentUser?.uid).update(userCopy)
                         

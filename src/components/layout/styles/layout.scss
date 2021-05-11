@@ -210,7 +210,6 @@
                 transition: 0.2s;
             }
         }
-    
     }
 
     #activeMenu {
@@ -238,72 +237,6 @@
         .menu-btn {
             margin-right: 1.5rem;
         }
-    }
-
-    .slideInMenu {
-        position: fixed;
-        top: 1rem;
-        left: 0;
-        background-color: #210340;
-        height: 100%;
-        width: 100%;
-        z-index: 1;
-        transition: transform 0.2s ease-in-out;
-        transform: translateX(-120%);
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-    
-        ul {
-            display: flex;
-            list-style: none;
-            flex-direction: column;
-            margin-top: 9rem;
-            
-            a {
-                color: white;
-                text-decoration: none;
-            }
-
-            li {
-                position: relative;
-                cursor: pointer;
-                color: white;
-                margin-bottom: 2.5rem;
-                font-size: 1.5rem;
-                text-align: center;
-            }
-
-            div {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                color: white;
-                font-size: 1.4rem;
-                
-                p {
-                    margin-right: 1rem;
-                }
-
-                svg {
-                    margin-top: 0.2rem;
-                }
-
-                p, svg {
-                    cursor: pointer;
-                }
-            }
-
-            .active {
-                font-weight: bold;
-                transition: 0.2s;
-            }
-        }
-    
-    }
-
-    #activeMenu {
-        transform: translateX(0%);
     }
 }
 
